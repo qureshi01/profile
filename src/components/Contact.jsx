@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, MessageSquare, Terminal, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, MessageSquare, CheckCircle2 } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './SocialIcons';
 import { personalInfo } from '../data/portfolioData';
 import { useArchitecture } from '../context/ArchitectureContext';
 import { TelemetryButton } from './TelemetryButton';
 
 export const Contact = () => {
-  const { triggerTelemetry, isDevToolsActive } = useArchitecture();
+  const { triggerTelemetry } = useArchitecture();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -45,18 +45,18 @@ export const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 sm:py-28 my-12 sm:my-16 bg-[#060911] border-t border-b border-slate-800/80 relative">
+    <section id="contact" className="py-24 my-16 bg-[#050811] border-t border-b border-slate-800/80 relative">
       
       {/* Decorative Glow Ambient Halo */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-cyan-500/5 rounded-full blur-[160px] pointer-events-none"></div>
 
       <div className="container-custom relative z-10">
         
-        {/* Section Title Header with Uncollapsed Margin Top/Bottom */}
-        <div className="flex flex-col items-center text-center mb-16 sm:mb-20 space-y-4">
+        {/* Section Title Header */}
+        <div className="flex flex-col items-center text-center mb-16 space-y-4">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 text-xs font-mono shadow-md">
             <MessageSquare className="w-3.5 h-3.5" />
-            <span>REST API ENDPOINT RECEIVER</span>
+            <span>CONTACT & INQUIRIES</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
             Get In <span className="gradient-text">Touch</span>
@@ -67,61 +67,66 @@ export const Contact = () => {
         </div>
 
         {/* Contact Grid: 2 Column Clean Architecture */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           
-          {/* Left Column: Direct Info Cards with Separation Margin */}
+          {/* Left Column: Direct Info Cards */}
           <div className="lg:col-span-5 space-y-6">
             
-            <div className="glass-card p-6 sm:p-8 space-y-6 my-2">
-              <h3 className="text-xl font-bold text-white flex items-center gap-2.5 border-b border-slate-800 pb-4">
-                <Terminal className="w-5 h-5 text-cyan-400" />
-                <span>Direct Contact Information</span>
+            <div className="glass-card p-6 sm:p-8 space-y-6">
+              <h3 className="text-xl font-bold text-white border-b border-slate-800 pb-4">
+                Direct Contact
               </h3>
 
-              <div className="space-y-4 text-xs sm:text-sm font-mono">
+              <div className="space-y-6 text-sm">
                 
-                {/* Email Box */}
-                <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1 my-2">
-                  <div className="flex items-center gap-2 text-cyan-400">
-                    <Mail className="w-4 h-4" />
-                    <span className="text-xs text-slate-400">Email Endpoint</span>
+                {/* Email Item */}
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-2xl bg-cyan-950/80 border border-cyan-500/30 flex items-center justify-center text-cyan-400 flex-shrink-0">
+                    <Mail className="w-5 h-5" />
                   </div>
-                  <a href={`mailto:${personalInfo.email}`} className="text-white font-bold text-sm block hover:text-cyan-300 transition-colors">
-                    {personalInfo.email}
-                  </a>
+                  <div>
+                    <span className="text-xs text-slate-400 font-mono block">Email</span>
+                    <a href={`mailto:${personalInfo.email}`} className="text-white font-bold text-base hover:text-cyan-300 transition-colors">
+                      {personalInfo.email}
+                    </a>
+                  </div>
                 </div>
 
-                {/* Phone Box */}
-                <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1 my-2">
-                  <div className="flex items-center gap-2 text-emerald-400">
-                    <Phone className="w-4 h-4" />
-                    <span className="text-xs text-slate-400">Phone Hotline</span>
+                {/* Phone Item */}
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-2xl bg-emerald-950/80 border border-emerald-500/30 flex items-center justify-center text-emerald-400 flex-shrink-0">
+                    <Phone className="w-5 h-5" />
                   </div>
-                  <a href={`tel:${personalInfo.phone}`} className="text-white font-bold text-sm block hover:text-emerald-300 transition-colors">
-                    {personalInfo.phone}
-                  </a>
+                  <div>
+                    <span className="text-xs text-slate-400 font-mono block">Phone</span>
+                    <a href={`tel:${personalInfo.phone}`} className="text-white font-bold text-base hover:text-emerald-300 transition-colors">
+                      {personalInfo.phone}
+                    </a>
+                  </div>
                 </div>
 
-                {/* Location Box */}
-                <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1 my-2">
-                  <div className="flex items-center gap-2 text-amber-400">
-                    <MapPin className="w-4 h-4" />
-                    <span className="text-xs text-slate-400">Location Base</span>
+                {/* Location Item */}
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-2xl bg-amber-950/80 border border-amber-500/30 flex items-center justify-center text-amber-400 flex-shrink-0">
+                    <MapPin className="w-5 h-5" />
                   </div>
-                  <span className="text-white font-bold text-sm block">
-                    {personalInfo.location}
-                  </span>
+                  <div>
+                    <span className="text-xs text-slate-400 font-mono block">Location</span>
+                    <span className="text-white font-bold text-base block">
+                      {personalInfo.location}
+                    </span>
+                  </div>
                 </div>
 
               </div>
 
               {/* Social Channels Row */}
-              <div className="pt-4 border-t border-slate-800 flex items-center gap-3">
+              <div className="pt-6 border-t border-slate-800 flex items-center gap-4">
                 <a
                   href={personalInfo.linkedin}
                   target="_blank"
                   rel="noreferrer"
-                  className="btn-secondary flex-1 text-xs py-3"
+                  className="btn-secondary flex-1 text-xs"
                 >
                   <LinkedinIcon className="w-4 h-4 text-indigo-400" />
                   <span>LinkedIn Profile</span>
@@ -131,7 +136,7 @@ export const Contact = () => {
                   href={personalInfo.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="btn-secondary flex-1 text-xs py-3"
+                  className="btn-secondary flex-1 text-xs"
                 >
                   <GithubIcon className="w-4 h-4 text-cyan-400" />
                   <span>GitHub Repos</span>
@@ -142,18 +147,13 @@ export const Contact = () => {
 
           </div>
 
-          {/* Right Column: REST API Message Form */}
+          {/* Right Column: Clean, Un-congested Simple Form */}
           <div className="lg:col-span-7">
-            <div className="glass-card p-6 sm:p-8 space-y-6 my-2">
+            <div className="glass-card p-6 sm:p-10 space-y-6">
               
-              <div className="flex items-center justify-between border-b border-slate-800 pb-4">
-                <div>
-                  <h3 className="text-xl font-bold text-white">Send Backend Payload</h3>
-                  <p className="text-xs font-mono text-cyan-400 mt-0.5">POST /api/v1/contact/send-message</p>
-                </div>
-                <span className="px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-xs font-mono text-emerald-400 font-bold">
-                  200 OK
-                </span>
+              <div className="border-b border-slate-800 pb-4">
+                <h3 className="text-xl font-bold text-white">Send Message</h3>
+                <p className="text-xs text-slate-400 mt-1">Feel free to reach out for role opportunities or technical collaboration.</p>
               </div>
 
               {submitted && (
@@ -163,64 +163,64 @@ export const Contact = () => {
                 </div>
               )}
 
-              <form onSubmit={handleSubmit} className="space-y-4 font-mono text-xs">
+              <form onSubmit={handleSubmit} className="space-y-6 text-sm">
                 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-1.5">
-                    <label className="text-slate-400 text-xs font-semibold">Your Name *</label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-slate-300 text-xs font-semibold block">Your Name *</label>
                     <input
                       type="text"
                       required
-                      placeholder="e.g. Hiring Manager"
+                      placeholder="e.g. John Doe"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full bg-slate-900/90 border border-slate-800 rounded-xl px-4 py-3 text-white text-xs focus:border-cyan-500 focus:outline-none transition-colors"
+                      className="w-full bg-[#070d18] border border-slate-700/80 rounded-xl px-4 py-3.5 text-white text-sm focus:border-cyan-400 focus:outline-none transition-colors"
                     />
                   </div>
 
-                  <div className="space-y-1.5">
-                    <label className="text-slate-400 text-xs font-semibold">Your Email *</label>
+                  <div className="space-y-2">
+                    <label className="text-slate-300 text-xs font-semibold block">Your Email *</label>
                     <input
                       type="email"
                       required
-                      placeholder="recruiter@company.com"
+                      placeholder="john@company.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full bg-slate-900/90 border border-slate-800 rounded-xl px-4 py-3 text-white text-xs focus:border-cyan-500 focus:outline-none transition-colors"
+                      className="w-full bg-[#070d18] border border-slate-700/80 rounded-xl px-4 py-3.5 text-white text-sm focus:border-cyan-400 focus:outline-none transition-colors"
                     />
                   </div>
                 </div>
 
-                <div className="space-y-1.5">
-                  <label className="text-slate-400 text-xs font-semibold">Subject / Role Title</label>
+                <div className="space-y-2">
+                  <label className="text-slate-300 text-xs font-semibold block">Subject</label>
                   <input
                     type="text"
-                    placeholder="Backend Developer Position"
+                    placeholder="Role Opportunity / Discussion"
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    className="w-full bg-slate-900/90 border border-slate-800 rounded-xl px-4 py-3 text-white text-xs focus:border-cyan-500 focus:outline-none transition-colors"
+                    className="w-full bg-[#070d18] border border-slate-700/80 rounded-xl px-4 py-3.5 text-white text-sm focus:border-cyan-400 focus:outline-none transition-colors"
                   />
                 </div>
 
-                <div className="space-y-1.5">
-                  <label className="text-slate-400 text-xs font-semibold">Message Payload *</label>
+                <div className="space-y-2">
+                  <label className="text-slate-300 text-xs font-semibold block">Message *</label>
                   <textarea
                     required
-                    rows="4"
+                    rows="5"
                     placeholder="Write your message here..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full bg-slate-900/90 border border-slate-800 rounded-xl px-4 py-3 text-white text-xs focus:border-cyan-500 focus:outline-none transition-colors resize-none"
+                    className="w-full bg-[#070d18] border border-slate-700/80 rounded-xl px-4 py-3.5 text-white text-sm focus:border-cyan-400 focus:outline-none transition-colors resize-none"
                   ></textarea>
                 </div>
 
                 <div className="pt-2">
                   <button
                     type="submit"
-                    className="btn-primary w-full justify-center text-xs py-3.5"
+                    className="btn-primary w-full justify-center text-sm py-4"
                   >
                     <Send className="w-4 h-4" />
-                    <span>Dispatch REST API Request</span>
+                    <span>Send Message</span>
                   </button>
                 </div>
 
