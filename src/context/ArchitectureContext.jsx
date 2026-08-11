@@ -32,9 +32,8 @@ export const ArchitectureProvider = ({ children }) => {
   });
 
   const triggerTelemetry = (traceData) => {
-    // If Telemetry mode is OFF, show helpful toast encouraging activation!
     if (!isDevToolsActive) {
-      showToast("💡 Telemetry Mode is OFF. Turn ON 'Telemetry' in the top navbar to simulate live backend request traces!");
+      showToast("💡 Telemetry is currently OFF. Turn ON 'Telemetry' in the navbar to enable live execution traces!");
       return;
     }
     setCurrentTrace(traceData);
@@ -45,7 +44,7 @@ export const ArchitectureProvider = ({ children }) => {
     setToastMessage(msg);
     setTimeout(() => {
       setToastMessage(null);
-    }, 4000);
+    }, 4500);
   };
 
   const closeTelemetry = () => {
@@ -57,7 +56,7 @@ export const ArchitectureProvider = ({ children }) => {
       const nextState = !prev;
       if (!nextState) {
         setIsTelemetryOpen(false);
-        showToast("Telemetry Mode OFF. Endpoint triggers now display API documentation mode.");
+        showToast("Telemetry Mode OFF. Endpoint buttons are now in read-only documentation mode.");
       } else {
         showToast("⚡ Telemetry Mode ON! Click any action button to inspect live backend request traces.");
       }

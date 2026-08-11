@@ -1,47 +1,44 @@
 import React, { useState } from 'react';
 import { Award, ShieldCheck, Eye, Terminal } from 'lucide-react';
 import { certificateData } from '../data/portfolioData';
-import { useArchitecture } from '../context/ArchitectureContext';
+import { TelemetryButton } from './TelemetryButton';
 
 export const Certificates = () => {
-  const { triggerTelemetry, isDevToolsActive } = useArchitecture();
   const [showImageModal, setShowImageModal] = useState(false);
 
-  const handleVerifyJwtToken = () => {
-    triggerTelemetry({
-      title: "Cryptographic Certificate Verification",
-      endpoint: `GET /api/v1/certificates/verify?code=${certificateData.certificateCode}`,
-      status: 200,
-      latency: "9ms",
-      traceId: "tr-cert-verify-1030",
-      steps: [
-        `1. Received verification request for Certificate Code: ${certificateData.certificateCode}`,
-        "2. RSA 256 public key fetched from AiVariant auth domain",
-        "3. Validating JWT signature and cryptographic checksum",
-        `4. Verified Subject: "${certificateData.issuedTo}"`,
-        "5. Verification Result: 100% VALID & AUTHENTICATED"
-      ],
-      payload: {
-        certificateCode: certificateData.certificateCode,
-        recipient: certificateData.issuedTo,
-        issuer: certificateData.issuer,
-        track: certificateData.role,
-        duration: certificateData.period,
-        issueDate: certificateData.issueDate,
-        verifiedStatus: "AUTHENTIC",
-        jwtHeader: { alg: "RS256", typ: "JWT" },
-        jwtPayload: {
-          sub: certificateData.issuedTo,
-          iss: certificateData.issuer,
-          code: certificateData.certificateCode,
-          iat: 1716076800
-        }
+  const certTraceData = {
+    title: "Cryptographic Certificate Verification",
+    endpoint: `GET /api/v1/certificates/verify?code=${certificateData.certificateCode}`,
+    status: 200,
+    latency: "9ms",
+    traceId: "tr-cert-verify-1030",
+    steps: [
+      `1. Received verification request for Certificate Code: ${certificateData.certificateCode}`,
+      "2. RSA 256 public key fetched from AiVariant auth domain",
+      "3. Validating JWT signature and cryptographic checksum",
+      `4. Verified Subject: "${certificateData.issuedTo}"`,
+      "5. Verification Result: 100% VALID & AUTHENTICATED"
+    ],
+    payload: {
+      certificateCode: certificateData.certificateCode,
+      recipient: certificateData.issuedTo,
+      issuer: certificateData.issuer,
+      track: certificateData.role,
+      duration: certificateData.period,
+      issueDate: certificateData.issueDate,
+      verifiedStatus: "AUTHENTIC",
+      jwtHeader: { alg: "RS256", typ: "JWT" },
+      jwtPayload: {
+        sub: certificateData.issuedTo,
+        iss: certificateData.issuer,
+        code: certificateData.certificateCode,
+        iat: 1716076800
       }
-    });
+    }
   };
 
   return (
-    <section id="certificates" className="py-28 sm:py-36 bg-[#090f1d] border-t border-b border-slate-800/80 relative my-12">
+    <section id="certificates" className="py-24 sm:py-36 bg-[#090f1d] border-t border-b border-slate-800/80 relative my-12">
       
       {/* Decorative Glow Ambient Halo */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-amber-500/5 rounded-full blur-[140px] pointer-events-none"></div>
@@ -49,7 +46,7 @@ export const Certificates = () => {
       <div className="container-custom relative z-10">
         
         {/* Section Title */}
-        <div className="flex flex-col items-center text-center mb-20 space-y-4">
+        <div className="flex flex-col items-center text-center mb-16 sm:mb-24 space-y-4">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-950/80 border border-amber-500/40 text-amber-400 text-xs font-mono shadow-md">
             <Award className="w-4 h-4" />
             <span>VERIFIED ACADEMIC & INDUSTRY CREDENTIALS</span>
@@ -57,13 +54,13 @@ export const Certificates = () => {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
             Official <span className="gradient-gold">Certifications</span>
           </h2>
-          <p className="text-slate-400 max-w-2xl text-base sm:text-lg leading-relaxed">
+          <p className="text-slate-400 max-w-2xl text-sm sm:text-lg leading-relaxed font-normal">
             Verified internship completions and full-stack software development credentials.
           </p>
         </div>
 
         {/* Certificate Card Container */}
-        <div className="max-w-5xl mx-auto glass-card p-8 sm:p-12 border border-amber-500/30 shadow-[0_0_50px_rgba(245,158,11,0.12)]">
+        <div className="max-w-5xl mx-auto glass-card p-7 sm:p-12 border border-amber-500/30 shadow-[0_0_50px_rgba(245,158,11,0.12)]">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             
             {/* Left Column: Image Thumbnail */}
@@ -82,7 +79,7 @@ export const Certificates = () => {
               <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3 p-4">
                 <button
                   onClick={() => setShowImageModal(true)}
-                  className="btn-primary text-xs"
+                  className="btn-primary text-xs py-3 px-6"
                 >
                   <Eye className="w-4 h-4" />
                   <span>Inspect Full Certificate</span>
@@ -111,19 +108,19 @@ export const Certificates = () => {
               <div className="space-y-3 font-mono text-xs text-slate-300 bg-slate-950/90 p-5 rounded-2xl border border-slate-800 shadow-inner">
                 <div className="flex justify-between items-center border-b border-slate-800/80 pb-2.5">
                   <span className="text-slate-400">Presented To:</span>
-                  <span className="text-white font-bold text-sm">{certificateData.issuedTo}</span>
+                  <span className="text-white font-bold text-xs sm:text-sm">{certificateData.issuedTo}</span>
                 </div>
                 <div className="flex justify-between items-center border-b border-slate-800/80 pb-2.5">
                   <span className="text-slate-400">Certificate Code:</span>
-                  <span className="text-amber-400 font-bold text-sm">{certificateData.certificateCode}</span>
+                  <span className="text-amber-400 font-bold text-xs sm:text-sm">{certificateData.certificateCode}</span>
                 </div>
                 <div className="flex justify-between items-center border-b border-slate-800/80 pb-2.5">
                   <span className="text-slate-400">Internship Period:</span>
-                  <span className="text-slate-200">{certificateData.period}</span>
+                  <span className="text-slate-200 text-xs sm:text-sm">{certificateData.period}</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-slate-400">Date of Issue:</span>
-                  <span className="text-slate-200">{certificateData.issueDate}</span>
+                  <span className="text-slate-200 text-xs sm:text-sm">{certificateData.issueDate}</span>
                 </div>
               </div>
 
@@ -131,21 +128,17 @@ export const Certificates = () => {
               <div className="flex flex-wrap items-center gap-4 pt-2">
                 <button
                   onClick={() => setShowImageModal(true)}
-                  className="btn-primary text-xs"
+                  className="btn-primary text-xs py-3 px-6"
                 >
                   <Eye className="w-4 h-4" />
                   <span>Preview Full Certificate</span>
                 </button>
 
-                {isDevToolsActive && (
-                  <button
-                    onClick={handleVerifyJwtToken}
-                    className="btn-telemetry"
-                  >
-                    <Terminal className="w-4 h-4" />
-                    <span>Verify RSA-256 JWT Token</span>
-                  </button>
-                )}
+                <TelemetryButton
+                  traceData={certTraceData}
+                  label="Verify RSA-256 JWT Token"
+                  icon={Terminal}
+                />
               </div>
 
             </div>
@@ -160,7 +153,7 @@ export const Certificates = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-lg animate-fade-in">
           <div className="bg-[#0b1329] border border-amber-500/40 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 space-y-4 shadow-[0_0_60px_rgba(0,0,0,0.8)]">
             <div className="flex justify-between items-center border-b border-slate-800 pb-4">
-              <h3 className="font-bold text-white font-mono text-sm sm:text-base flex items-center gap-2">
+              <h3 className="font-bold text-white font-mono text-xs sm:text-base flex items-center gap-2">
                 <Award className="w-5 h-5 text-amber-400" />
                 AiVariant Certificate - {certificateData.certificateCode}
               </h3>

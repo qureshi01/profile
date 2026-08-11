@@ -1,36 +1,11 @@
 import React from 'react';
-import { Briefcase, Calendar, MapPin, CheckCircle2, Terminal, Server, ShieldCheck, Activity, Cpu, Layers, Building2 } from 'lucide-react';
+import { Briefcase, Calendar, MapPin, CheckCircle2, Cpu, Layers, Building2, Terminal } from 'lucide-react';
 import { experienceData } from '../data/portfolioData';
-import { useArchitecture } from '../context/ArchitectureContext';
+import { TelemetryButton } from './TelemetryButton';
 
 export const Experience = () => {
-  const { triggerTelemetry, isDevToolsActive } = useArchitecture();
-
-  const handleInspectExperience = (exp) => {
-    triggerTelemetry({
-      title: `Experience Log: ${exp.company}`,
-      endpoint: exp.telemetryEndpoint,
-      status: 200,
-      latency: "16ms",
-      traceId: `tr-exp-${exp.company.toLowerCase().replace(/[^a-z0-9]/g, '')}`,
-      steps: [
-        `1. Querying employment record for ${exp.company}`,
-        "2. Spring Security verified recruiter access permissions",
-        `3. Fetching bullet metrics: ${exp.highlights.length} production achievements`,
-        "4. Returned JSON response stream"
-      ],
-      payload: {
-        role: exp.role,
-        company: exp.company,
-        period: exp.period,
-        badge: exp.badge,
-        deliverables: exp.highlights
-      }
-    });
-  };
-
   return (
-    <section id="experience" className="py-28 sm:py-36 bg-[#070b14] border-t border-b border-slate-800/80 relative my-12">
+    <section id="experience" className="py-24 sm:py-36 bg-[#070b14] border-t border-b border-slate-800/80 relative my-12">
       
       {/* Background Decorative Halo */}
       <div className="absolute top-1/3 right-10 w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[140px] pointer-events-none"></div>
@@ -38,7 +13,7 @@ export const Experience = () => {
       <div className="container-custom relative z-10">
         
         {/* Section Title */}
-        <div className="flex flex-col items-center text-center mb-20 space-y-4">
+        <div className="flex flex-col items-center text-center mb-16 sm:mb-24 space-y-4">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-950/80 border border-cyan-500/40 text-cyan-400 text-xs font-mono shadow-md">
             <Briefcase className="w-4 h-4" />
             <span>ENTERPRISE PRODUCTION HISTORY</span>
@@ -46,17 +21,17 @@ export const Experience = () => {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
             Professional <span className="gradient-text">Work Experience</span>
           </h2>
-          <p className="text-slate-400 max-w-2xl text-base sm:text-lg leading-relaxed">
+          <p className="text-slate-400 max-w-2xl text-sm sm:text-lg leading-relaxed font-normal">
             Track record of architecting production healthcare ERP microservices, integration pipelines, and full-stack web applications.
           </p>
         </div>
 
         {/* Full-Width Enterprise Experience Panels (No Empty Spaces!) */}
-        <div className="space-y-12 sm:space-y-16">
+        <div className="space-y-10 sm:space-y-16">
           {experienceData.map((exp, idx) => (
             <div
               key={idx}
-              className="glass-card p-8 sm:p-12 space-y-8 border border-slate-700/80 hover:border-cyan-500/60 shadow-2xl transition-all w-full"
+              className="glass-card p-7 sm:p-12 space-y-8 border border-slate-700/80 hover:border-cyan-500/60 shadow-2xl transition-all w-full"
             >
               
               {/* Company & Role Header Banner */}
@@ -100,7 +75,7 @@ export const Experience = () => {
               </div>
 
               {/* Summary Description */}
-              <p className="text-slate-200 text-base sm:text-lg leading-relaxed font-normal">
+              <p className="text-slate-200 text-sm sm:text-lg leading-relaxed font-normal">
                 {exp.summary}
               </p>
 
@@ -115,7 +90,7 @@ export const Experience = () => {
                   {exp.highlights.map((item, hIdx) => (
                     <div
                       key={hIdx}
-                      className="flex items-start gap-3.5 p-4 rounded-xl bg-slate-950/80 border border-slate-800/90 text-slate-300 text-xs sm:text-sm leading-relaxed"
+                      className="flex items-start gap-3.5 p-4 sm:p-5 rounded-xl bg-slate-950/80 border border-slate-800/90 text-slate-300 text-xs sm:text-sm leading-relaxed"
                     >
                       <CheckCircle2 className="w-4.5 h-4.5 text-cyan-400 flex-shrink-0 mt-0.5" />
                       <span>{item}</span>
@@ -126,22 +101,32 @@ export const Experience = () => {
 
               {/* Footer Row: Telemetry Action & Status */}
               <div className="pt-6 border-t border-slate-800/80 flex flex-wrap justify-between items-center gap-4">
-                {isDevToolsActive ? (
-                  <button
-                    onClick={() => handleInspectExperience(exp)}
-                    className="btn-telemetry"
-                  >
-                    <Terminal className="w-4 h-4" />
-                    <span>Inspect {exp.telemetryEndpoint}</span>
-                  </button>
-                ) : (
-                  <div className="flex items-center gap-2 text-xs font-mono text-slate-400">
-                    <Cpu className="w-4 h-4 text-cyan-400" />
-                    <span>{exp.company} • Enterprise Architecture</span>
-                  </div>
-                )}
+                <TelemetryButton
+                  traceData={{
+                    title: `Experience Log: ${exp.company}`,
+                    endpoint: exp.telemetryEndpoint,
+                    status: 200,
+                    latency: "16ms",
+                    traceId: `tr-exp-${exp.company.toLowerCase().replace(/[^a-z0-9]/g, '')}`,
+                    steps: [
+                      `1. Querying employment record for ${exp.company}`,
+                      "2. Spring Security verified recruiter access permissions",
+                      `3. Fetching bullet metrics: ${exp.highlights.length} production achievements`,
+                      "4. Returned JSON response stream"
+                    ],
+                    payload: {
+                      role: exp.role,
+                      company: exp.company,
+                      period: exp.period,
+                      badge: exp.badge,
+                      deliverables: exp.highlights
+                    }
+                  }}
+                  label={`Inspect ${exp.telemetryEndpoint}`}
+                  icon={Terminal}
+                />
 
-                <span className="text-xs font-mono text-emerald-400 font-semibold bg-emerald-950/80 border border-emerald-500/30 px-3 py-1 rounded-lg">
+                <span className="text-xs font-mono text-emerald-400 font-semibold bg-emerald-950/80 border border-emerald-500/30 px-3.5 py-1.5 rounded-xl">
                   ✓ Verified Production Experience
                 </span>
               </div>
