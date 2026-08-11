@@ -81,9 +81,9 @@ export const Certificates = () => {
                   { label: 'Internship Period', val: certificateData.period,            color: 'text-[var(--text-secondary)]' },
                   { label: 'Date of Issue',     val: certificateData.issueDate,        color: 'text-[var(--text-secondary)]' },
                 ].map((row, i, arr) => (
-                  <div key={i} className={`flex justify-between items-center gap-2 ${i < arr.length - 1 ? 'border-b border-[var(--border-subtle)] pb-2' : ''}`}>
-                    <span className="text-[var(--text-muted)]">{row.label}:</span>
-                    <span className={`font-bold ${row.color} text-right`}>{row.val}</span>
+                  <div key={i} className={`flex items-center gap-3 ${i < arr.length - 1 ? 'border-b border-[var(--border-subtle)] pb-2.5' : ''}`}>
+                    <span className="text-[var(--text-muted)] whitespace-nowrap flex-shrink-0 min-w-[110px]">{row.label}:</span>
+                    <span className={`font-bold ${row.color} text-right ml-auto truncate`}>{row.val}</span>
                   </div>
                 ))}
               </div>

@@ -23,27 +23,24 @@ export const Experience = () => {
             <div key={idx} className="card space-y-5">
 
               {/* Header */}
-              <div className="flex flex-col sm:flex-row justify-between items-start gap-4 border-b border-[var(--border-subtle)] pb-5">
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-md bg-[var(--bg-surface)] border border-[var(--border-accent)] flex items-center justify-center text-[var(--cyan)] flex-shrink-0 mt-0.5">
-                    <Building2 className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2.5 flex-wrap">
-                      <h3 className="font-extrabold text-[var(--text-primary)] text-lg sm:text-xl leading-tight">{exp.role}</h3>
-                      <span className="tag tag-cyan">{exp.badge}</span>
-                    </div>
-                    <p className="text-[var(--text-secondary)] text-sm font-semibold mt-1">{exp.company}</p>
-                  </div>
+              <div className="flex items-start gap-4 border-b border-[var(--border-subtle)] pb-5">
+                <div className="w-10 h-10 rounded-md bg-[var(--bg-surface)] border border-[var(--border-accent)] flex items-center justify-center text-[var(--cyan)] flex-shrink-0 mt-0.5">
+                  <Building2 className="w-5 h-5" />
                 </div>
-
-                <div className="flex items-center gap-3 flex-wrap">
-                  <span className="inner-box flex items-center gap-1.5 font-mono text-[11px] text-[var(--text-muted)] py-2">
-                    <Calendar className="w-3.5 h-3.5 text-amber-400" /> {exp.period}
-                  </span>
-                  <span className="inner-box flex items-center gap-1.5 font-mono text-[11px] text-[var(--text-muted)] py-2">
-                    <MapPin className="w-3.5 h-3.5 text-emerald-400" /> {exp.location}
-                  </span>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2.5 flex-wrap">
+                    <h3 className="font-extrabold text-[var(--text-primary)] text-lg sm:text-xl leading-tight">{exp.role}</h3>
+                    <span className="tag tag-cyan">{exp.badge}</span>
+                  </div>
+                  <p className="text-[var(--text-secondary)] text-sm font-semibold mt-1">{exp.company}</p>
+                  <div className="flex items-center gap-2 flex-wrap mt-2.5">
+                    <span className="flex items-center gap-1.5 font-mono text-[11px] text-[var(--text-muted)] bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2.5 py-1">
+                      <Calendar className="w-3 h-3 text-amber-400 flex-shrink-0" /> {exp.period}
+                    </span>
+                    <span className="flex items-center gap-1.5 font-mono text-[11px] text-[var(--text-muted)] bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2.5 py-1">
+                      <MapPin className="w-3 h-3 text-emerald-400 flex-shrink-0" /> {exp.location}
+                    </span>
+                  </div>
                 </div>
               </div>
 

@@ -8,7 +8,7 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
-  base: './',
+  base: '/profile/',
   build: {
     outDir: 'dist',
     sourcemap: false

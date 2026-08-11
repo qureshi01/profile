@@ -95,9 +95,10 @@ export const About = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 {personalInfo.education.map((edu, idx) => (
                   <div key={idx} className="card space-y-3">
-                    <div className="flex items-center justify-between">
-                      <span className="tag tag-amber">{edu.badge}</span>
-                      <span className="text-[10px] font-mono text-[var(--text-muted)]">{edu.period}</span>
+                    {/* Badge row — always inline */}
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="tag tag-amber flex-shrink-0">{edu.badge}</span>
+                      <span className="text-[10px] font-mono text-[var(--text-muted)] whitespace-nowrap">{edu.period}</span>
                     </div>
                     <div>
                       <p className="font-bold text-[var(--text-primary)] text-sm leading-snug">{edu.degree}</p>
