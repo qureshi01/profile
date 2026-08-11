@@ -4,7 +4,7 @@ import { personalInfo } from '../data/portfolioData';
 import { useArchitecture } from '../context/ArchitectureContext';
 
 export const About = () => {
-  const { triggerTelemetry } = useArchitecture();
+  const { triggerTelemetry, isDevToolsActive } = useArchitecture();
   const [showResumeModal, setShowResumeModal] = useState(false);
 
   const handleInspectResumePayload = () => {
@@ -34,113 +34,124 @@ export const About = () => {
   };
 
   return (
-    <section id="about" className="py-20 bg-slate-950/60 border-t border-b border-slate-800/80 relative">
-      <div className="container-custom">
+    <section id="about" className="py-28 sm:py-36 bg-[#090f1d] border-t border-b border-slate-800/80 relative my-12">
+      
+      {/* Background Decorative Halo */}
+      <div className="absolute top-1/2 left-10 w-[500px] h-[500px] bg-indigo-500/5 rounded-full blur-[140px] pointer-events-none"></div>
+
+      <div className="container-custom relative z-10">
         
         {/* Section Title */}
-        <div className="flex flex-col items-center text-center mb-14 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 text-xs font-mono">
-            <User className="w-3.5 h-3.5" />
+        <div className="flex flex-col items-center text-center mb-20 space-y-4">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-950/80 border border-cyan-500/40 text-cyan-400 text-xs font-mono shadow-md">
+            <User className="w-4 h-4" />
             <span>ARCHITECTURAL PROFILE</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
             About <span className="gradient-text">Hashim Qureshi</span>
           </h2>
-          <p className="text-slate-400 max-w-2xl text-sm sm:text-base">
+          <p className="text-slate-400 max-w-2xl text-base sm:text-lg leading-relaxed">
             Software Engineer specializing in scalable microservices, high-volume transactions, and healthcare system compliance.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
           {/* Left Column: Bio & Core Attributes */}
-          <div className="lg:col-span-7 space-y-6">
+          <div className="lg:col-span-7 space-y-8">
             
-            <div className="glass-card p-6 sm:p-8 space-y-6">
-              <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                <Terminal className="w-5 h-5 text-cyan-400" />
+            <div className="glass-card p-8 sm:p-10 space-y-6 border border-slate-700/80 shadow-2xl">
+              <h3 className="text-2xl font-bold text-white flex items-center gap-3 border-b border-slate-800 pb-4">
+                <Terminal className="w-6 h-6 text-cyan-400" />
                 <span>Backend Engineering Focus</span>
               </h3>
 
-              <p className="text-slate-300 leading-relaxed text-sm sm:text-base">
+              <p className="text-slate-200 leading-relaxed text-base sm:text-lg font-normal">
                 {personalInfo.bio}
               </p>
 
               {/* Bullet Highlights */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                <div className="flex items-start gap-3 p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-2">
+                <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-slate-950/90 border border-slate-800/90 shadow-md">
                   <CheckCircle2 className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" />
                   <div>
                     <h4 className="text-sm font-bold text-white">Spring Boot Microservices</h4>
-                    <p className="text-xs text-slate-400">Eureka Registry, Cloud Gateway, OpenFeign</p>
+                    <p className="text-xs text-slate-400 mt-0.5">Eureka Registry, Cloud Gateway, OpenFeign</p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3 p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-slate-950/90 border border-slate-800/90 shadow-md">
                   <CheckCircle2 className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5" />
                   <div>
                     <h4 className="text-sm font-bold text-white">Healthcare ERP Compliance</h4>
-                    <p className="text-xs text-slate-400">HL7 / FHIR Integration, NPHIES, ZATCA</p>
+                    <p className="text-xs text-slate-400 mt-0.5">HL7 / FHIR Integration, NPHIES, ZATCA</p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3 p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-slate-950/90 border border-slate-800/90 shadow-md">
                   <CheckCircle2 className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
                   <div>
                     <h4 className="text-sm font-bold text-white">Async Event Bus</h4>
-                    <p className="text-xs text-slate-400">Apache Kafka & ActiveMQ Pipelines</p>
+                    <p className="text-xs text-slate-400 mt-0.5">Apache Kafka & ActiveMQ Pipelines</p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3 p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-slate-950/90 border border-slate-800/90 shadow-md">
                   <CheckCircle2 className="w-5 h-5 text-indigo-400 flex-shrink-0 mt-0.5" />
                   <div>
                     <h4 className="text-sm font-bold text-white">High Scale Storage</h4>
-                    <p className="text-xs text-slate-400">PostgreSQL, MongoDB (100M+ Records)</p>
+                    <p className="text-xs text-slate-400 mt-0.5">PostgreSQL, MongoDB (100M+ Records)</p>
                   </div>
                 </div>
               </div>
 
-              {/* Telemetry Trigger Button for Profile Data */}
-              <div className="pt-4 border-t border-slate-800 flex flex-wrap items-center justify-between gap-4">
-                <button
-                  onClick={handleInspectResumePayload}
-                  className="btn-telemetry"
-                >
-                  <Terminal className="w-3.5 h-3.5" />
-                  <span>Inspect GET /candidate/hashim Payload</span>
-                </button>
-
+              {/* Action Buttons */}
+              <div className="pt-6 border-t border-slate-800 flex flex-wrap items-center justify-between gap-4">
                 <button
                   onClick={() => setShowResumeModal(true)}
-                  className="btn-secondary text-xs"
+                  className="btn-primary text-xs"
                 >
-                  <Eye className="w-4 h-4 text-cyan-400" />
+                  <Eye className="w-4 h-4" />
                   <span>View Original Resume Document</span>
                 </button>
+
+                {isDevToolsActive && (
+                  <button
+                    onClick={handleInspectResumePayload}
+                    className="btn-telemetry"
+                  >
+                    <Terminal className="w-4 h-4" />
+                    <span>Inspect Candidate Payload</span>
+                  </button>
+                )}
               </div>
 
             </div>
 
-            {/* Education Cards */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-bold text-white flex items-center gap-2 font-mono">
-                <GraduationCap className="w-5 h-5 text-amber-400" />
+            {/* Education Cards Grid */}
+            <div className="space-y-6">
+              <h3 className="text-xl font-bold text-white flex items-center gap-2.5 font-mono">
+                <GraduationCap className="w-6 h-6 text-amber-400" />
                 <span>Education & Professional Certifications</span>
               </h3>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {personalInfo.education.map((edu, idx) => (
-                  <div key={idx} className="glass-card p-5 space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-amber-950/60 border border-amber-500/30 text-amber-300">
-                        {edu.badge}
-                      </span>
-                      <span className="text-xs font-mono text-slate-400">{edu.period}</span>
+                  <div key={idx} className="glass-card p-6 space-y-3 border border-slate-700/80 shadow-xl flex flex-col justify-between">
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[11px] font-mono px-2.5 py-1 rounded-full bg-amber-950/80 border border-amber-500/30 text-amber-300 font-bold">
+                          {edu.badge}
+                        </span>
+                        <span className="text-xs font-mono text-slate-400">{edu.period}</span>
+                      </div>
+                      <h4 className="font-bold text-white text-base leading-snug">{edu.degree}</h4>
+                      <p className="text-xs text-slate-300">{edu.institution}</p>
                     </div>
-                    <h4 className="font-bold text-white text-sm leading-snug">{edu.degree}</h4>
-                    <p className="text-xs text-slate-300">{edu.institution}</p>
-                    <p className="text-xs font-mono text-emerald-400 font-semibold pt-1">{edu.score}</p>
+
+                    <p className="text-xs font-mono text-emerald-400 font-bold pt-2 border-t border-slate-800">
+                      {edu.score}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -149,46 +160,46 @@ export const About = () => {
           </div>
 
           {/* Right Column: Contact Metadata & Spoken Languages */}
-          <div className="lg:col-span-5 space-y-6">
+          <div className="lg:col-span-5 space-y-8">
             
             {/* Direct Information Card */}
-            <div className="glass-card p-6 space-y-4">
-              <h3 className="text-lg font-bold text-white flex items-center gap-2 font-mono border-b border-slate-800 pb-3">
-                <User className="w-4 h-4 text-cyan-400" />
+            <div className="glass-card p-8 space-y-6 border border-slate-700/80 shadow-2xl">
+              <h3 className="text-xl font-bold text-white flex items-center gap-2.5 font-mono border-b border-slate-800 pb-4">
+                <User className="w-5 h-5 text-cyan-400" />
                 <span>Quick Metadata</span>
               </h3>
 
-              <div className="space-y-3 text-sm font-mono">
-                <div className="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/70 border border-slate-800">
-                  <span className="text-slate-400 flex items-center gap-2">
+              <div className="space-y-4 text-sm font-mono">
+                <div className="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800">
+                  <span className="text-slate-400 flex items-center gap-2.5">
                     <Mail className="w-4 h-4 text-cyan-400" />
                     <span>Email</span>
                   </span>
-                  <a href={`mailto:${personalInfo.email}`} className="text-cyan-300 hover:underline text-xs">
+                  <a href={`mailto:${personalInfo.email}`} className="text-cyan-300 hover:underline text-xs font-semibold">
                     {personalInfo.email}
                   </a>
                 </div>
 
-                <div className="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/70 border border-slate-800">
-                  <span className="text-slate-400 flex items-center gap-2">
+                <div className="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800">
+                  <span className="text-slate-400 flex items-center gap-2.5">
                     <Phone className="w-4 h-4 text-emerald-400" />
                     <span>Phone</span>
                   </span>
-                  <a href={`tel:${personalInfo.phone}`} className="text-slate-200 text-xs">
+                  <a href={`tel:${personalInfo.phone}`} className="text-slate-200 text-xs font-semibold">
                     {personalInfo.phone}
                   </a>
                 </div>
 
-                <div className="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/70 border border-slate-800">
-                  <span className="text-slate-400 flex items-center gap-2">
+                <div className="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800">
+                  <span className="text-slate-400 flex items-center gap-2.5">
                     <MapPin className="w-4 h-4 text-amber-400" />
                     <span>Location</span>
                   </span>
-                  <span className="text-slate-200 text-xs">{personalInfo.location}</span>
+                  <span className="text-slate-200 text-xs font-semibold">{personalInfo.location}</span>
                 </div>
 
-                <div className="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/70 border border-slate-800">
-                  <span className="text-slate-400 flex items-center gap-2">
+                <div className="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800">
+                  <span className="text-slate-400 flex items-center gap-2.5">
                     <ExternalLink className="w-4 h-4 text-indigo-400" />
                     <span>LinkedIn</span>
                   </span>
@@ -196,7 +207,7 @@ export const About = () => {
                     href={personalInfo.linkedin}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-indigo-400 hover:underline text-xs"
+                    className="text-indigo-400 hover:underline text-xs font-semibold"
                   >
                     in/hashimqureshic
                   </a>
@@ -205,15 +216,15 @@ export const About = () => {
             </div>
 
             {/* Spoken Languages Card */}
-            <div className="glass-card p-6 space-y-4">
-              <h3 className="text-lg font-bold text-white flex items-center gap-2 font-mono border-b border-slate-800 pb-3">
-                <Globe className="w-4 h-4 text-emerald-400" />
-                <span>Languages</span>
+            <div className="glass-card p-8 space-y-6 border border-slate-700/80 shadow-2xl">
+              <h3 className="text-xl font-bold text-white flex items-center gap-2.5 font-mono border-b border-slate-800 pb-4">
+                <Globe className="w-5 h-5 text-emerald-400" />
+                <span>Spoken Languages</span>
               </h3>
 
-              <div className="space-y-2.5 text-xs font-mono">
+              <div className="space-y-3 text-xs font-mono">
                 {personalInfo.languages.map((lang, idx) => (
-                  <div key={idx} className="flex justify-between items-center p-2 rounded bg-slate-900/60 border border-slate-800">
+                  <div key={idx} className="flex justify-between items-center p-3 rounded-xl bg-slate-950 border border-slate-800">
                     <span className="text-white font-bold">{lang.name}</span>
                     <span className="text-slate-400">{lang.level}</span>
                   </div>
@@ -229,16 +240,16 @@ export const About = () => {
 
       {/* Resume Image Modal */}
       {showResumeModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
-          <div className="bg-slate-950 border border-slate-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6 space-y-6">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-lg animate-fade-in">
+          <div className="bg-[#0b1329] border border-cyan-500/40 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 space-y-6 shadow-[0_0_60px_rgba(0,0,0,0.8)]">
             <div className="flex justify-between items-center border-b border-slate-800 pb-4">
               <h3 className="font-bold text-lg text-white font-mono flex items-center gap-2">
                 <FileText className="w-5 h-5 text-cyan-400" />
-                Hashim Qureshi Chennadan - Resume Pages
+                Hashim Qureshi Chennadan - Resume Document Pages
               </h3>
               <button
                 onClick={() => setShowResumeModal(false)}
-                className="p-1 rounded text-slate-400 hover:text-white"
+                className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
               >
                 ✕
               </button>
@@ -246,12 +257,12 @@ export const About = () => {
 
             <div className="space-y-6">
               <div>
-                <h4 className="text-xs font-mono text-slate-400 mb-2">Resume Page 1:</h4>
-                <img src="/assets/resume-page1.png" alt="Resume Page 1" className="w-full rounded-xl border border-slate-800" />
+                <h4 className="text-xs font-mono text-cyan-400 mb-2">Resume Page 1:</h4>
+                <img src="/assets/resume-page1.png" alt="Resume Page 1" className="w-full rounded-xl border border-slate-800 shadow-2xl" />
               </div>
               <div>
-                <h4 className="text-xs font-mono text-slate-400 mb-2">Resume Page 2:</h4>
-                <img src="/assets/resume-page2.png" alt="Resume Page 2" className="w-full rounded-xl border border-slate-800" />
+                <h4 className="text-xs font-mono text-cyan-400 mb-2">Resume Page 2:</h4>
+                <img src="/assets/resume-page2.png" alt="Resume Page 2" className="w-full rounded-xl border border-slate-800 shadow-2xl" />
               </div>
             </div>
           </div>

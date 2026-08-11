@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Award, ShieldCheck, CheckCircle2, Eye, Terminal, Download, Shield } from 'lucide-react';
+import { Award, ShieldCheck, Eye, Terminal } from 'lucide-react';
 import { certificateData } from '../data/portfolioData';
 import { useArchitecture } from '../context/ArchitectureContext';
 
 export const Certificates = () => {
-  const { triggerTelemetry } = useArchitecture();
+  const { triggerTelemetry, isDevToolsActive } = useArchitecture();
   const [showImageModal, setShowImageModal] = useState(false);
 
   const handleVerifyJwtToken = () => {
@@ -41,29 +41,33 @@ export const Certificates = () => {
   };
 
   return (
-    <section id="certificates" className="py-20 bg-slate-950/60 border-t border-b border-slate-800/80 relative">
-      <div className="container-custom">
+    <section id="certificates" className="py-28 sm:py-36 bg-[#090f1d] border-t border-b border-slate-800/80 relative my-12">
+      
+      {/* Decorative Glow Ambient Halo */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-amber-500/5 rounded-full blur-[140px] pointer-events-none"></div>
+
+      <div className="container-custom relative z-10">
         
         {/* Section Title */}
-        <div className="flex flex-col items-center text-center mb-16 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-950/60 border border-amber-500/30 text-amber-400 text-xs font-mono">
-            <Award className="w-3.5 h-3.5" />
+        <div className="flex flex-col items-center text-center mb-20 space-y-4">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-950/80 border border-amber-500/40 text-amber-400 text-xs font-mono shadow-md">
+            <Award className="w-4 h-4" />
             <span>VERIFIED ACADEMIC & INDUSTRY CREDENTIALS</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
             Official <span className="gradient-gold">Certifications</span>
           </h2>
-          <p className="text-slate-400 max-w-2xl text-sm sm:text-base">
+          <p className="text-slate-400 max-w-2xl text-base sm:text-lg leading-relaxed">
             Verified internship completions and full-stack software development credentials.
           </p>
         </div>
 
-        {/* Certificate Display Card */}
-        <div className="max-w-4xl mx-auto glass-card p-6 sm:p-10 border border-amber-500/30 shadow-[0_0_30px_rgba(245,158,11,0.1)]">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+        {/* Certificate Card Container */}
+        <div className="max-w-5xl mx-auto glass-card p-8 sm:p-12 border border-amber-500/30 shadow-[0_0_50px_rgba(245,158,11,0.12)]">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             
-            {/* Left Column: Image Thumbnail & Modal Trigger */}
-            <div className="md:col-span-5 relative group overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 aspect-[3/4] flex items-center justify-center">
+            {/* Left Column: Image Thumbnail */}
+            <div className="lg:col-span-5 relative group overflow-hidden rounded-2xl border border-slate-700 bg-slate-950 aspect-[3/4] flex items-center justify-center shadow-2xl">
               <img
                 src={certificateData.image}
                 alt={certificateData.title}
@@ -75,7 +79,7 @@ export const Certificates = () => {
               />
               
               {/* Overlay View Button */}
-              <div className="absolute inset-0 bg-slate-950/70 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3 p-4">
+              <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3 p-4">
                 <button
                   onClick={() => setShowImageModal(true)}
                   className="btn-primary text-xs"
@@ -87,10 +91,10 @@ export const Certificates = () => {
             </div>
 
             {/* Right Column: Certificate Metadata */}
-            <div className="md:col-span-7 space-y-6">
+            <div className="lg:col-span-7 space-y-6">
               
-              <div className="space-y-2">
-                <span className="px-3 py-1 rounded font-mono text-xs font-bold bg-amber-950 text-amber-300 border border-amber-500/40 inline-flex items-center gap-1.5">
+              <div className="space-y-3">
+                <span className="px-3.5 py-1 rounded-full font-mono text-xs font-bold bg-amber-950/90 text-amber-300 border border-amber-500/40 inline-flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-emerald-400" />
                   <span>Verified Credentials</span>
                 </span>
@@ -104,16 +108,16 @@ export const Certificates = () => {
               </div>
 
               {/* Certificate Details Table */}
-              <div className="space-y-2.5 font-mono text-xs text-slate-300 bg-slate-900/80 p-4 rounded-xl border border-slate-800">
-                <div className="flex justify-between items-center border-b border-slate-800 pb-2">
+              <div className="space-y-3 font-mono text-xs text-slate-300 bg-slate-950/90 p-5 rounded-2xl border border-slate-800 shadow-inner">
+                <div className="flex justify-between items-center border-b border-slate-800/80 pb-2.5">
                   <span className="text-slate-400">Presented To:</span>
-                  <span className="text-white font-bold">{certificateData.issuedTo}</span>
+                  <span className="text-white font-bold text-sm">{certificateData.issuedTo}</span>
                 </div>
-                <div className="flex justify-between items-center border-b border-slate-800 pb-2">
+                <div className="flex justify-between items-center border-b border-slate-800/80 pb-2.5">
                   <span className="text-slate-400">Certificate Code:</span>
-                  <span className="text-amber-400 font-bold">{certificateData.certificateCode}</span>
+                  <span className="text-amber-400 font-bold text-sm">{certificateData.certificateCode}</span>
                 </div>
-                <div className="flex justify-between items-center border-b border-slate-800 pb-2">
+                <div className="flex justify-between items-center border-b border-slate-800/80 pb-2.5">
                   <span className="text-slate-400">Internship Period:</span>
                   <span className="text-slate-200">{certificateData.period}</span>
                 </div>
@@ -123,23 +127,25 @@ export const Certificates = () => {
                 </div>
               </div>
 
-              {/* Buttons */}
-              <div className="flex flex-wrap items-center gap-3 pt-2">
-                <button
-                  onClick={handleVerifyJwtToken}
-                  className="btn-telemetry"
-                >
-                  <Terminal className="w-3.5 h-3.5" />
-                  <span>Verify Certificate Signature Token</span>
-                </button>
-
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center gap-4 pt-2">
                 <button
                   onClick={() => setShowImageModal(true)}
-                  className="btn-secondary text-xs"
+                  className="btn-primary text-xs"
                 >
-                  <Eye className="w-4 h-4 text-amber-400" />
-                  <span>Preview Image</span>
+                  <Eye className="w-4 h-4" />
+                  <span>Preview Full Certificate</span>
                 </button>
+
+                {isDevToolsActive && (
+                  <button
+                    onClick={handleVerifyJwtToken}
+                    className="btn-telemetry"
+                  >
+                    <Terminal className="w-4 h-4" />
+                    <span>Verify RSA-256 JWT Token</span>
+                  </button>
+                )}
               </div>
 
             </div>
@@ -151,16 +157,16 @@ export const Certificates = () => {
 
       {/* Full Certificate Preview Modal */}
       {showImageModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-in">
-          <div className="bg-slate-950 border border-slate-800 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 space-y-4">
-            <div className="flex justify-between items-center border-b border-slate-800 pb-3">
-              <h3 className="font-bold text-white font-mono text-sm flex items-center gap-2">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-lg animate-fade-in">
+          <div className="bg-[#0b1329] border border-amber-500/40 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 space-y-4 shadow-[0_0_60px_rgba(0,0,0,0.8)]">
+            <div className="flex justify-between items-center border-b border-slate-800 pb-4">
+              <h3 className="font-bold text-white font-mono text-sm sm:text-base flex items-center gap-2">
                 <Award className="w-5 h-5 text-amber-400" />
                 AiVariant Certificate - {certificateData.certificateCode}
               </h3>
               <button
                 onClick={() => setShowImageModal(false)}
-                className="p-1 rounded text-slate-400 hover:text-white"
+                className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
               >
                 ✕
               </button>

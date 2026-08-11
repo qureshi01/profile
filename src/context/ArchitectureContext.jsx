@@ -31,6 +31,10 @@ export const ArchitectureProvider = ({ children }) => {
   });
 
   const triggerTelemetry = (traceData) => {
+    // Strictly respect the isDevToolsActive toggle!
+    if (!isDevToolsActive) {
+      return;
+    }
     setCurrentTrace(traceData);
     setIsTelemetryOpen(true);
   };
@@ -40,7 +44,13 @@ export const ArchitectureProvider = ({ children }) => {
   };
 
   const toggleDevTools = () => {
-    setIsDevToolsActive(prev => !prev);
+    setIsDevToolsActive(prev => {
+      const nextState = !prev;
+      if (!nextState) {
+        setIsTelemetryOpen(false); // Close telemetry drawer if user switches telemetry OFF
+      }
+      return nextState;
+    });
   };
 
   const toggleTelemetryInfo = () => {
