@@ -95,28 +95,39 @@ h1,h2,h3,h4,h5,h6 { font-family: var(--font-head); letter-spacing: -0.025em; }
   background:    var(--bg-elevated);
   border:        1px solid var(--border-default);
   border-radius: var(--radius-card);
-  padding:       2rem;
+  padding:       2.25rem 2.5rem;
   transition:    border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 .card:hover {
   border-color: var(--border-accent);
-  box-shadow:   0 0 0 1px rgba(6,182,212,0.15), 0 20px 40px -12px rgba(0,0,0,0.5);
+  box-shadow:   0 0 0 1px rgba(6,182,212,0.15), 0 24px 48px -12px rgba(0,0,0,0.55);
   transform:    translateY(-2px);
 }
-@media (max-width:640px) { .card { padding: 1.5rem; } }
+@media (max-width:768px) { .card { padding: 1.5rem 1.75rem; } }
+@media (max-width:480px) { .card { padding: 1.25rem 1.25rem; } }
 
 /* also keep glass-card aliased so existing code doesn't break */
-.glass-card { background: var(--bg-elevated); border: 1px solid var(--border-default); border-radius: var(--radius-card); padding: 2rem; transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease; }
-.glass-card:hover { border-color: var(--border-accent); box-shadow: 0 0 0 1px rgba(6,182,212,0.15), 0 20px 40px -12px rgba(0,0,0,0.5); transform: translateY(-2px); }
-@media (max-width:640px) { .glass-card { padding: 1.5rem; } }
+.glass-card { background: var(--bg-elevated); border: 1px solid var(--border-default); border-radius: var(--radius-card); padding: 2.25rem 2.5rem; transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease; }
+.glass-card:hover { border-color: var(--border-accent); box-shadow: 0 0 0 1px rgba(6,182,212,0.15), 0 24px 48px -12px rgba(0,0,0,0.55); transform: translateY(-2px); }
+@media (max-width:768px) { .glass-card { padding: 1.5rem 1.75rem; } }
+@media (max-width:480px) { .glass-card { padding: 1.25rem; } }
 
 /* Inner surface (nested boxes inside cards) */
 .inner-box {
   background:    var(--bg-surface);
   border:        1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
-  padding:       1rem 1.25rem;
+  padding:       1.1rem 1.4rem;
 }
+
+/* ─────────────────────────────────────────────
+   CARD STACK GAP — consistent vertical rhythm between cards
+───────────────────────────────────────────── */
+.card-stack > * + * { margin-top: 1.75rem; }
+.card-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+.card-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+@media (max-width:900px) { .card-grid-3 { grid-template-columns: repeat(2,1fr); } }
+@media (max-width:600px) { .card-grid-2, .card-grid-3 { grid-template-columns: 1fr; gap: 1.25rem; } }
 
 /* ─────────────────────────────────────────────
    BUTTON SYSTEM
@@ -132,14 +143,17 @@ h1,h2,h3,h4,h5,h6 { font-family: var(--font-head); letter-spacing: -0.025em; }
   font-size:       0.8125rem;    /* 13px */
   font-weight:     600;
   white-space:     nowrap;
-  padding:         0.6875rem 1.375rem;  /* 11px 22px */
-  min-height:      42px;
+  padding:         0.8125rem 1.625rem;  /* 13px 26px — roomier */
+  min-height:      46px;
   border-radius:   var(--radius-md);
   border:          1px solid transparent;
   cursor:          pointer;
   text-decoration: none;
   transition:      all 0.18s ease;
-  letter-spacing:  0.01em;
+  letter-spacing:  0.02em;
+}
+@media (max-width:480px) {
+  .btn { padding: 0.75rem 1.25rem; min-height: 42px; font-size: 0.75rem; }
 }
 
 /* Primary — filled gradient */
@@ -257,9 +271,10 @@ h1,h2,h3,h4,h5,h6 { font-family: var(--font-head); letter-spacing: -0.025em; }
 /* ─────────────────────────────────────────────
    SECTION HEADING BLOCK (reusable)
 ───────────────────────────────────────────── */
-.section-title { margin-bottom:3.5rem; text-align:center; }
-.section-title h2 { font-size:clamp(1.75rem,4vw,2.75rem); font-weight:800; color:var(--text-primary); }
-.section-title p  { color:var(--text-secondary); font-size:1rem; margin-top:0.75rem; max-width:38rem; margin-left:auto; margin-right:auto; }
+.section-title { margin-bottom:4rem; text-align:center; }
+.section-title h2 { font-size:clamp(1.875rem,4vw,3rem); font-weight:800; color:var(--text-primary); }
+.section-title p  { color:var(--text-secondary); font-size:1rem; margin-top:0.875rem; max-width:42rem; margin-left:auto; margin-right:auto; line-height:1.75; }
+@media (max-width:640px) { .section-title { margin-bottom:2.5rem; } .section-title h2 { font-size: 1.75rem; } }
 
 /* ─────────────────────────────────────────────
    FORM INPUT
@@ -269,14 +284,15 @@ h1,h2,h3,h4,h5,h6 { font-family: var(--font-head); letter-spacing: -0.025em; }
   background:    var(--bg-surface);
   border:        1px solid var(--border-default);
   border-radius: var(--radius-sm);
-  padding:       0.75rem 1rem;
+  padding:       0.9rem 1.1rem;
   color:         var(--text-primary);
   font-family:   var(--font-sans);
   font-size:     0.9rem;
-  transition:    border-color 0.15s ease;
+  line-height:   1.5;
+  transition:    border-color 0.15s ease, box-shadow 0.15s ease;
   outline:       none;
 }
-.form-input:focus { border-color: var(--cyan); }
+.form-input:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(6,182,212,0.12); }
 .form-input::placeholder { color: var(--text-muted); }
 
 /* ─────────────────────────────────────────────

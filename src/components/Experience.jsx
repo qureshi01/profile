@@ -18,7 +18,7 @@ export const Experience = () => {
         </div>
 
         {/* Experience cards */}
-        <div className="space-y-6">
+        <div className="space-y-8">
           {experienceData.map((exp, idx) => (
             <div key={idx} className="card space-y-5">
 
@@ -37,11 +37,11 @@ export const Experience = () => {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2 flex-wrap">
-                  <span className="inner-box flex items-center gap-1.5 font-mono text-[11px] text-[var(--text-muted)] py-1.5">
+                <div className="flex items-center gap-3 flex-wrap">
+                  <span className="inner-box flex items-center gap-1.5 font-mono text-[11px] text-[var(--text-muted)] py-2">
                     <Calendar className="w-3.5 h-3.5 text-amber-400" /> {exp.period}
                   </span>
-                  <span className="inner-box flex items-center gap-1.5 font-mono text-[11px] text-[var(--text-muted)] py-1.5">
+                  <span className="inner-box flex items-center gap-1.5 font-mono text-[11px] text-[var(--text-muted)] py-2">
                     <MapPin className="w-3.5 h-3.5 text-emerald-400" /> {exp.location}
                   </span>
                 </div>
@@ -53,7 +53,7 @@ export const Experience = () => {
               </p>
 
               {/* Highlights grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {exp.highlights.map((item, hIdx) => (
                   <div key={hIdx} className="inner-box flex items-start gap-2.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[var(--cyan)] flex-shrink-0 mt-0.5" />

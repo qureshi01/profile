@@ -76,9 +76,9 @@ export const Skills = () => {
           </div>
 
           {/* Skills grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {cat.skills.map((skill, idx) => (
-              <div key={idx} className="inner-box space-y-3 group hover:border-[var(--border-accent)] transition-colors">
+              <div key={idx} className="inner-box space-y-3.5 group hover:border-[var(--border-accent)] transition-colors">
                 <div className="flex items-start justify-between gap-2">
                   <div>
                     <p className="font-semibold text-[var(--text-primary)] text-sm group-hover:text-[var(--cyan-lt)] transition-colors">

@@ -53,7 +53,7 @@ export const Contact = () => {
           <p>Available for full-time Backend Engineering, Spring Boot Microservices, and remote opportunities.</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
 
           {/* ── Left — contact info ── */}
           <div className="lg:col-span-5 space-y-4">
@@ -62,7 +62,7 @@ export const Contact = () => {
                 Direct Contact
               </h3>
 
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {contactItems.map((item, i) => (
                   <div key={i} className="inner-box flex items-center gap-3">
                     <item.icon className={`w-4 h-4 flex-shrink-0 ${item.color}`} />
@@ -109,8 +109,8 @@ export const Contact = () => {
                 </div>
               )}
 
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div className="space-y-1.5">
                     <label className="text-[11px] font-mono text-[var(--text-muted)] uppercase tracking-wider">Name *</label>
                     <input type="text" required placeholder="John Doe"

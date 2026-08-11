@@ -49,10 +49,10 @@ export const About = () => {
           <p>Software Engineer specializing in scalable microservices, high-volume transactions, and healthcare compliance.</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
 
           {/* ── Left ── */}
-          <div className="lg:col-span-7 space-y-6">
+          <div className="lg:col-span-7 space-y-7">
 
             {/* Bio card */}
             <div className="card space-y-5">
@@ -66,7 +66,7 @@ export const About = () => {
               </p>
 
               {/* Attributes grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-1">
                 {attributes.map((a, i) => (
                   <div key={i} className="inner-box flex items-start gap-3">
                     <a.icon className={`w-4 h-4 ${a.color} flex-shrink-0 mt-0.5`} />
@@ -88,11 +88,11 @@ export const About = () => {
             </div>
 
             {/* Education */}
-            <div className="space-y-4">
+            <div className="space-y-5">
               <h3 className="flex items-center gap-2 font-mono font-bold text-[var(--text-primary)] text-sm">
                 <GraduationCap className="w-4 h-4 text-amber-400" /> Education & Certifications
               </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 {personalInfo.education.map((edu, idx) => (
                   <div key={idx} className="card space-y-3">
                     <div className="flex items-center justify-between">
@@ -114,7 +114,7 @@ export const About = () => {
           </div>
 
           {/* ── Right ── */}
-          <div className="lg:col-span-5 space-y-4">
+          <div className="lg:col-span-5 space-y-6">
 
             {/* Metadata card */}
             <div className="card space-y-4">
