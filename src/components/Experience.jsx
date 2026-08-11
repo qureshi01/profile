@@ -8,9 +8,9 @@ export const Experience = () => {
     <section id="experience" className="py-24 sm:py-32 my-12 sm:my-20 bg-slate-950/60 border-t border-b border-slate-800/80 relative">
       <div className="container-custom">
         
-        {/* Section Title with Uncollapsed Spacing */}
+        {/* Section Title Header */}
         <div className="flex flex-col items-center text-center mb-16 sm:mb-20 space-y-4">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 text-xs font-mono shadow-md">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-md bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 text-xs font-mono shadow-md">
             <Briefcase className="w-3.5 h-3.5" />
             <span>ENTERPRISE PRODUCTION HISTORY</span>
           </div>
@@ -22,15 +22,15 @@ export const Experience = () => {
           </p>
         </div>
 
-        {/* Full-Width Enterprise Panels - Noticeable Card Vertical Separation */}
+        {/* Full-Width Enterprise Panels with Square Borders & Generous Text Margins */}
         <div className="space-y-10 sm:space-y-14">
           {experienceData.map((exp, idx) => (
-            <div key={idx} className="glass-card p-6 sm:p-8 space-y-6">
+            <div key={idx} className="glass-card p-7 sm:p-9 space-y-6 rounded-lg">
               
               {/* Header Banner */}
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-slate-800 pb-4">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-slate-800/80 pb-5">
                 <div className="flex items-center gap-3.5">
-                  <div className="w-11 h-11 rounded-xl bg-cyan-950/80 border border-cyan-500/30 flex items-center justify-center text-cyan-400 flex-shrink-0">
+                  <div className="w-11 h-11 rounded-md bg-cyan-950/80 border border-cyan-500/30 flex items-center justify-center text-cyan-400 flex-shrink-0">
                     <Building2 className="w-5 h-5" />
                   </div>
                   <div>
@@ -38,7 +38,7 @@ export const Experience = () => {
                       <h3 className="text-xl sm:text-2xl font-extrabold text-white">
                         {exp.role}
                       </h3>
-                      <span className="px-3 py-0.5 rounded text-xs font-mono font-bold bg-cyan-950 text-cyan-400 border border-cyan-500/30">
+                      <span className="px-3 py-0.5 rounded-md text-xs font-mono font-bold bg-cyan-950 text-cyan-400 border border-cyan-500/30">
                         {exp.badge}
                       </span>
                     </div>
@@ -49,25 +49,25 @@ export const Experience = () => {
                 </div>
 
                 <div className="flex items-center gap-3 text-xs font-mono text-slate-400 flex-wrap pt-2 sm:pt-0">
-                  <span className="flex items-center gap-1.5 bg-slate-900/80 px-3 py-1.5 rounded-xl border border-slate-800">
+                  <span className="flex items-center gap-1.5 bg-slate-900/80 px-3 py-1.5 rounded-md border border-slate-800">
                     <Calendar className="w-3.5 h-3.5 text-amber-400" />
                     {exp.period}
                   </span>
-                  <span className="flex items-center gap-1.5 bg-slate-900/80 px-3 py-1.5 rounded-xl border border-slate-800">
+                  <span className="flex items-center gap-1.5 bg-slate-900/80 px-3 py-1.5 rounded-md border border-slate-800">
                     <MapPin className="w-3.5 h-3.5 text-emerald-400" />
                     {exp.location}
                   </span>
                 </div>
               </div>
 
-              <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+              <p className="text-slate-300 text-sm sm:text-base leading-relaxed my-3">
                 {exp.summary}
               </p>
 
-              {/* Deliverables Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Deliverables Grid with Square Sub-Boxes */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-3">
                 {exp.highlights.map((item, hIdx) => (
-                  <div key={hIdx} className="flex items-start gap-3 p-3.5 rounded-xl bg-slate-900/60 border border-slate-800">
+                  <div key={hIdx} className="flex items-start gap-3 p-4 rounded-md bg-slate-900/60 border border-slate-800">
                     <CheckCircle2 className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
                     <span className="text-xs text-slate-300 leading-relaxed">{item}</span>
                   </div>
@@ -75,7 +75,7 @@ export const Experience = () => {
               </div>
 
               {/* Bottom Action Row */}
-              <div className="pt-4 border-t border-slate-800/80 flex flex-wrap justify-between items-center gap-4">
+              <div className="pt-5 border-t border-slate-800/80 flex flex-wrap justify-between items-center gap-4">
                 <TelemetryButton
                   traceData={{
                     title: `Experience Log: ${exp.company}`,
@@ -101,7 +101,7 @@ export const Experience = () => {
                   icon={Terminal}
                 />
 
-                <span className="text-xs font-mono text-emerald-400 font-semibold bg-emerald-950/80 border border-emerald-500/30 px-3 py-1.5 rounded-xl">
+                <span className="text-xs font-mono text-emerald-400 font-semibold bg-emerald-950/80 border border-emerald-500/30 px-3 py-1.5 rounded-md">
                   ✓ Verified Production Experience
                 </span>
               </div>

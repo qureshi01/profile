@@ -4,8 +4,8 @@
 :root {
   --bg-main: #060911;
   --bg-card: #0c1424;
-  --border-color: rgba(255, 255, 255, 0.12);
-  --border-glow: rgba(6, 182, 212, 0.45);
+  --border-color: rgba(255, 255, 255, 0.14);
+  --border-glow: rgba(6, 182, 212, 0.5);
   
   --primary: #06b6d4;      /* Cyber Cyan */
   --secondary: #6366f1;    /* Indigo Accent */
@@ -49,7 +49,7 @@ body {
 }
 ::-webkit-scrollbar-thumb {
   background: #1e293b;
-  border-radius: 4px;
+  border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--primary);
@@ -79,54 +79,54 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Strict Container Boundary across whole website (Start and End at same point!) */
 .container-custom {
-  max-width: 1150px;
+  max-width: 1160px;
   margin: 0 auto;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
 }
 
-/* Glassmorphism Card Container */
+/* Glassmorphism Card Container (Sharp Modern Square Borders for Maximum Visibility) */
 .glass-card {
   background: #0c1424;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 24px;
-  box-shadow: 0 16px 45px -10px rgba(0, 0, 0, 0.7);
-  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  box-shadow: 0 16px 45px -10px rgba(0, 0, 0, 0.75);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .glass-card:hover {
-  border-color: rgba(6, 182, 212, 0.6);
-  box-shadow: 0 24px 60px -10px rgba(6, 182, 212, 0.3);
-  transform: translateY(-3px);
+  border-color: rgba(6, 182, 212, 0.7);
+  box-shadow: 0 24px 60px -10px rgba(6, 182, 212, 0.35);
+  transform: translateY(-2px);
 }
 
-/* ULTRA-LUXURIOUS CYBER-GLOWING TELEMETRY BUTTON SYSTEM */
+/* CRISP SQUARE-BORDER BUTTON ARCHITECTURE SYSTEM (8px Crisp Square Radius) */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
   background: linear-gradient(135deg, #0891b2 0%, #4f46e5 100%);
   color: #ffffff;
   font-weight: 700;
   font-family: var(--font-mono);
-  padding: 0.75rem 1.35rem;
+  padding: 0.8rem 1.6rem;
   min-height: 44px;
-  border-radius: 14px;
+  border-radius: 8px;
   border: 1px solid rgba(56, 189, 248, 0.6);
   cursor: pointer;
   white-space: nowrap;
   transition: all 0.25s ease;
-  box-shadow: 0 4px 22px rgba(6, 182, 212, 0.4);
+  box-shadow: 0 4px 18px rgba(6, 182, 212, 0.35);
   text-decoration: none;
-  font-size: 0.8rem;
+  font-size: 0.825rem;
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(6, 182, 212, 0.65);
+  box-shadow: 0 8px 28px rgba(6, 182, 212, 0.6);
   border-color: #38bdf8;
   background: linear-gradient(135deg, #06b6d4 0%, #6366f1 100%);
 }
@@ -135,20 +135,20 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
   background: #0d1627;
   color: var(--text-main);
   font-weight: 700;
   font-family: var(--font-mono);
-  padding: 0.75rem 1.35rem;
+  padding: 0.8rem 1.6rem;
   min-height: 44px;
-  border-radius: 14px;
+  border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   cursor: pointer;
   white-space: nowrap;
   transition: all 0.25s ease;
   text-decoration: none;
-  font-size: 0.8rem;
+  font-size: 0.825rem;
 }
 
 .btn-secondary:hover {
@@ -163,21 +163,21 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
   background: linear-gradient(135deg, #042530 0%, #0d1627 50%, #171b3a 100%);
   color: #38bdf8;
   font-weight: 700;
   font-family: var(--font-mono);
-  padding: 0.75rem 1.35rem;
+  padding: 0.8rem 1.6rem;
   min-height: 44px;
-  border-radius: 14px;
-  border: 1.5px solid rgba(6, 182, 212, 0.7);
+  border-radius: 8px;
+  border: 1.5px solid rgba(6, 182, 212, 0.75);
   cursor: pointer;
   white-space: nowrap;
   transition: all 0.3s ease;
   box-shadow: 0 0 20px rgba(6, 182, 212, 0.35);
   text-decoration: none;
-  font-size: 0.8rem;
+  font-size: 0.825rem;
 }
 
 .btn-telemetry:hover {
