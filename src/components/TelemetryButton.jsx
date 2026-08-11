@@ -1,28 +1,29 @@
 import React from 'react';
-import { Terminal, Lock } from 'lucide-react';
+import { Terminal, Lock, Play } from 'lucide-react';
 import { useArchitecture } from '../context/ArchitectureContext';
 
-export const TelemetryButton = ({ traceData, label, className = "", icon: Icon = Terminal }) => {
+export const TelemetryButton = ({ traceData, label, className = "", icon: Icon = Play }) => {
   const { isDevToolsActive, triggerTelemetry } = useArchitecture();
 
   if (isDevToolsActive) {
     return (
       <button
         onClick={() => triggerTelemetry(traceData)}
-        className={`btn-telemetry ${className}`}
+        className={`inline-flex items-center gap-2 bg-gradient-to-r from-cyan-950/90 to-indigo-950/90 hover:from-cyan-900 hover:to-indigo-900 border border-cyan-500/50 hover:border-cyan-400 text-cyan-300 hover:text-white px-5 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-semibold transition-all shadow-[0_0_15px_rgba(6,182,212,0.25)] hover:shadow-[0_0_25px_rgba(6,182,212,0.45)] hover:-translate-y-0.5 cursor-pointer ${className}`}
         title="Simulate Live Backend Request Trace"
       >
-        <Icon className="w-3.5 h-3.5 flex-shrink-0 text-emerald-400" />
+        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping flex-shrink-0"></span>
+        <Icon className="w-4 h-4 flex-shrink-0 text-cyan-400" />
         <span className="truncate">{label}</span>
       </button>
     );
   }
 
-  // When Telemetry is OFF: Keep button fully visible, rendered in read-only API documentation mode!
+  // When Telemetry is OFF: Keep button fully visible, rendered as a stylish read-only API endpoint badge!
   return (
     <div
       onClick={() => triggerTelemetry(traceData)}
-      className={`group relative inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-950/90 border border-slate-800 text-slate-400 text-xs font-mono cursor-not-allowed opacity-90 hover:border-slate-700 transition-all ${className}`}
+      className={`group relative inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-slate-950/90 border border-slate-800 text-slate-400 text-xs font-mono cursor-not-allowed opacity-90 hover:border-slate-700 transition-all ${className}`}
       title="Turn ON Telemetry in top bar to discover live request traces!"
     >
       <Lock className="w-3.5 h-3.5 text-slate-500 flex-shrink-0" />
