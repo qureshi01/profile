@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Terminal, Cpu, Menu, X, Activity, Award, HelpCircle, Sparkles, Info, AlertCircle } from 'lucide-react';
+import { Terminal, Cpu, Menu, X, Activity, Award, HelpCircle, Sparkles } from 'lucide-react';
 import { useArchitecture } from '../context/ArchitectureContext';
 
 export const Navbar = () => {
@@ -46,14 +46,14 @@ export const Navbar = () => {
       <header className="sticky top-0 z-40 bg-[#060911]/95 backdrop-blur-2xl border-b border-slate-800 shadow-2xl">
         <div className="container-custom flex items-center justify-between h-20">
           
-          {/* Brand & System Status */}
-          <a href="#home" className="flex items-center gap-3.5 group text-decoration-none">
+          {/* Brand Logo & Name (Fixed size, never shifts!) */}
+          <a href="#home" className="flex items-center gap-3.5 group text-decoration-none flex-shrink-0">
             <div className="w-11 h-11 rounded-xl bg-cyan-950/90 border border-cyan-500/50 flex items-center justify-center text-cyan-400 group-hover:border-cyan-400 group-hover:shadow-[0_0_20px_rgba(6,182,212,0.5)] transition-all">
               <Cpu className="w-5 h-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-bold text-lg tracking-tight text-white group-hover:text-cyan-400 transition-colors">
+                <span className="font-bold text-lg tracking-tight text-white group-hover:text-cyan-400 transition-colors whitespace-nowrap">
                   Hashim Qureshi
                 </span>
                 <div className="flex items-center gap-1.5 bg-emerald-950/80 border border-emerald-500/40 px-2.5 py-0.5 rounded-full text-[10px] text-emerald-400 font-mono">
@@ -61,7 +61,7 @@ export const Navbar = () => {
                   <span>ONLINE</span>
                 </div>
               </div>
-              <p className="text-xs text-slate-400 font-mono">Backend Engineer & Architect</p>
+              <p className="text-xs text-slate-400 font-mono whitespace-nowrap">Backend Engineer & Architect</p>
             </div>
           </a>
 
@@ -78,8 +78,8 @@ export const Navbar = () => {
             <a href="#contact" className="hover:text-cyan-400 transition-colors">Contact</a>
           </nav>
 
-          {/* Action Controls: System Health, Telemetry Switch & Discovery Banner */}
-          <div className="hidden lg:flex items-center gap-3">
+          {/* Action Controls: Fixed Width & Layout (Zero Shift!) */}
+          <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
             <button
               onClick={handleHealthCheck}
               className="flex items-center gap-2 bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 text-slate-300 hover:text-cyan-400 px-3.5 py-2 rounded-xl text-xs font-mono transition-all shadow-md"
@@ -89,39 +89,27 @@ export const Navbar = () => {
               <span>GET /actuator/health</span>
             </button>
 
-            {/* Telemetry Switch & Discovery Hint */}
-            <div className="flex items-center gap-2">
-              {!isDevToolsActive && (
-                <button
-                  onClick={toggleDevTools}
-                  className="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-950/80 border border-amber-500/40 text-amber-300 text-[11px] font-mono animate-pulse hover:bg-amber-900/80 transition-colors"
-                >
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>Turn ON Telemetry to discover live traces!</span>
-                </button>
-              )}
+            {/* Telemetry Switch & Info Button (Fixed size!) */}
+            <div className="flex items-center gap-1 bg-slate-900/90 p-1 rounded-xl border border-slate-800 shadow-inner">
+              <button
+                onClick={toggleDevTools}
+                className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-mono border transition-all ${
+                  isDevToolsActive
+                    ? 'bg-cyan-950/90 border-cyan-500/60 text-cyan-300 shadow-[0_0_16px_rgba(6,182,212,0.35)] font-bold'
+                    : 'bg-slate-950 border-slate-800 text-slate-500 hover:text-slate-300'
+                }`}
+              >
+                <Terminal className="w-3.5 h-3.5" />
+                <span>{isDevToolsActive ? 'Telemetry: ON' : 'Telemetry: OFF'}</span>
+              </button>
 
-              <div className="flex items-center gap-1 bg-slate-900/90 p-1 rounded-xl border border-slate-800 shadow-inner">
-                <button
-                  onClick={toggleDevTools}
-                  className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono border transition-all ${
-                    isDevToolsActive
-                      ? 'bg-cyan-950/90 border-cyan-500/60 text-cyan-300 shadow-[0_0_16px_rgba(6,182,212,0.35)] font-bold'
-                      : 'bg-slate-950 border-slate-800 text-slate-500 hover:text-slate-300'
-                  }`}
-                >
-                  <Terminal className="w-3.5 h-3.5" />
-                  <span>{isDevToolsActive ? 'Telemetry: ON' : 'Telemetry: OFF'}</span>
-                </button>
-
-                <button
-                  onClick={toggleTelemetryInfo}
-                  className="p-1.5 rounded-lg text-slate-400 hover:text-cyan-400 hover:bg-slate-800 transition-colors"
-                  title="What is Telemetry Mode?"
-                >
-                  <HelpCircle className="w-4 h-4" />
-                </button>
-              </div>
+              <button
+                onClick={toggleTelemetryInfo}
+                className="p-1.5 rounded-lg text-slate-400 hover:text-cyan-400 hover:bg-slate-800 transition-colors"
+                title="What is Telemetry Mode?"
+              >
+                <HelpCircle className="w-4 h-4" />
+              </button>
             </div>
           </div>
 
@@ -141,35 +129,35 @@ export const Navbar = () => {
             <a
               href="#about"
               onClick={() => setMobileMenuOpen(false)}
-              className="block text-slate-300 hover:text-cyan-400 py-1.5 font-medium"
+              className="block text-slate-300 hover:text-cyan-400 py-2 font-medium text-base"
             >
               About
             </a>
             <a
               href="#skills"
               onClick={() => setMobileMenuOpen(false)}
-              className="block text-slate-300 hover:text-cyan-400 py-1.5 font-medium"
+              className="block text-slate-300 hover:text-cyan-400 py-2 font-medium text-base"
             >
               Skills
             </a>
             <a
               href="#experience"
               onClick={() => setMobileMenuOpen(false)}
-              className="block text-slate-300 hover:text-cyan-400 py-1.5 font-medium"
+              className="block text-slate-300 hover:text-cyan-400 py-2 font-medium text-base"
             >
               Experience
             </a>
             <a
               href="#projects"
               onClick={() => setMobileMenuOpen(false)}
-              className="block text-slate-300 hover:text-cyan-400 py-1.5 font-medium"
+              className="block text-slate-300 hover:text-cyan-400 py-2 font-medium text-base"
             >
               Projects
             </a>
             <a
               href="#certificates"
               onClick={() => setMobileMenuOpen(false)}
-              className="block text-slate-300 hover:text-cyan-400 py-1.5 font-medium flex items-center gap-2"
+              className="block text-slate-300 hover:text-cyan-400 py-2 font-medium text-base flex items-center gap-2"
             >
               <Award className="w-4 h-4 text-amber-400" />
               Certificates
@@ -177,7 +165,7 @@ export const Navbar = () => {
             <a
               href="#contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="block text-slate-300 hover:text-cyan-400 py-1.5 font-medium"
+              className="block text-slate-300 hover:text-cyan-400 py-2 font-medium text-base"
             >
               Contact
             </a>
@@ -188,10 +176,10 @@ export const Navbar = () => {
                   toggleDevTools();
                   setMobileMenuOpen(false);
                 }}
-                className="w-full flex items-center justify-center gap-2 bg-slate-900 border border-slate-700 text-slate-200 py-2.5 rounded-xl text-xs font-mono"
+                className="w-full flex items-center justify-center gap-2 bg-slate-900 border border-slate-700 text-slate-200 py-3 rounded-xl text-sm font-mono font-bold"
               >
-                <Terminal className="w-3.5 h-3.5 text-cyan-400" />
-                <span>{isDevToolsActive ? 'Telemetry: ON' : 'Turn ON Telemetry to discover'}</span>
+                <Terminal className="w-4 h-4 text-cyan-400" />
+                <span>{isDevToolsActive ? 'Telemetry: ON' : 'Telemetry: OFF'}</span>
               </button>
             </div>
           </div>
@@ -239,7 +227,7 @@ export const Navbar = () => {
               <div className="pt-2 flex justify-end">
                 <button
                   onClick={() => setShowTelemetryInfo(false)}
-                  className="btn-primary text-xs"
+                  className="btn-primary text-xs py-3 px-6"
                 >
                   <span>Got It, Let Me Explore!</span>
                 </button>
@@ -253,7 +241,7 @@ export const Navbar = () => {
       {/* Floating Toast Notification Banner */}
       {toastMessage && (
         <div className="fixed bottom-6 right-6 z-50 max-w-md bg-[#0b1329] border border-cyan-500/50 text-white p-4 rounded-2xl shadow-[0_10px_35px_rgba(6,182,212,0.35)] flex items-start gap-3 animate-fade-in font-mono text-xs">
-          <Info className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5" />
+          <Activity className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5 animate-pulse" />
           <div className="leading-relaxed text-slate-200">
             {toastMessage}
           </div>

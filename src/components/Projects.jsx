@@ -1,19 +1,19 @@
 import React from 'react';
-import { Layers, Play } from 'lucide-react';
+import { Layers } from 'lucide-react';
 import { GithubIcon } from './SocialIcons';
 import { projectsData } from '../data/portfolioData';
 import { TelemetryButton } from './TelemetryButton';
 
 export const Projects = () => {
   return (
-    <section id="projects" className="py-24 sm:py-36 bg-[#060911] border-t border-b border-slate-800/80 relative my-12">
+    <section id="projects" className="py-28 sm:py-36 bg-[#050811] border-t border-b border-slate-800/80 relative my-16">
       
       {/* Decorative Glow Ambient Halo */}
       <div className="absolute top-1/3 left-10 w-[550px] h-[550px] bg-cyan-500/5 rounded-full blur-[160px] pointer-events-none"></div>
 
       <div className="container-custom relative z-10">
         
-        {/* Section Title with Generous Bottom Margin to Prevent Line Touching */}
+        {/* Section Title with Generous Bottom Margin */}
         <div className="flex flex-col items-center text-center mb-16 sm:mb-24 space-y-4">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-950/80 border border-cyan-500/40 text-cyan-400 text-xs font-mono shadow-md">
             <Layers className="w-4 h-4" />
@@ -28,17 +28,17 @@ export const Projects = () => {
         </div>
 
         {/* Projects Cards Grid with Generous Spacing and Luxury Card Padding */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12 lg:gap-14 items-stretch">
           {projectsData.map((proj) => (
             <div
               key={proj.id}
-              className="glass-card flex flex-col justify-between p-7 sm:p-10 space-y-8 border border-slate-700/80 hover:border-cyan-500/60 transition-all group h-full shadow-2xl"
+              className="glass-card flex flex-col justify-between p-8 sm:p-12 space-y-8 border border-slate-700/80 hover:border-cyan-500/60 transition-all group h-full shadow-2xl"
             >
-              <div className="space-y-6">
+              <div className="space-y-7">
                 
                 {/* Header Badge */}
-                <div className="flex justify-between items-center border-b border-slate-800/80 pb-4">
-                  <span className="px-3 py-1.5 rounded-lg font-mono text-xs font-bold bg-cyan-950/90 text-cyan-300 border border-cyan-500/40">
+                <div className="flex justify-between items-center border-b border-slate-800/80 pb-5">
+                  <span className="px-4 py-1.5 rounded-xl font-mono text-xs font-bold bg-cyan-950/90 text-cyan-300 border border-cyan-500/40">
                     {proj.badge}
                   </span>
                   <div className="flex items-center gap-2 text-slate-400">
@@ -55,24 +55,24 @@ export const Projects = () => {
                 </div>
 
                 <div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors leading-snug">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white group-hover:text-cyan-300 transition-colors leading-snug">
                     {proj.title}
                   </h3>
-                  <p className="text-xs font-mono text-cyan-400 mt-1.5">
+                  <p className="text-xs sm:text-sm font-mono text-cyan-400 mt-2">
                     {proj.subtitle}
                   </p>
                 </div>
 
-                <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-normal">
+                <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-normal">
                   {proj.description}
                 </p>
 
                 {/* Architecture Key Features Panel with Generous Inner Padding */}
-                <div className="p-5 sm:p-6 rounded-2xl bg-slate-950/90 border border-slate-800 text-xs font-mono space-y-3 shadow-inner">
+                <div className="p-6 sm:p-7 rounded-2xl bg-slate-950/90 border border-slate-800 text-xs font-mono space-y-4 shadow-inner">
                   <span className="text-cyan-400 font-bold block text-xs uppercase tracking-wider">
                     ⚡ Backend Architectural Specs
                   </span>
-                  <div className="space-y-2 text-slate-300 text-xs">
+                  <div className="space-y-2.5 text-slate-300 text-xs">
                     {Object.entries(proj.architecture).map(([key, val], aIdx) => (
                       <div key={aIdx} className="flex justify-between items-center border-b border-slate-900 pb-2">
                         <span className="text-slate-400 capitalize">{key}:</span>
@@ -83,7 +83,7 @@ export const Projects = () => {
                 </div>
 
                 {/* Technical Bullet Highlights */}
-                <ul className="space-y-2.5 text-xs text-slate-300 list-disc list-inside">
+                <ul className="space-y-3 text-xs sm:text-sm text-slate-300 list-disc list-inside">
                   {proj.points.slice(0, 3).map((pt, ptIdx) => (
                     <li key={ptIdx} className="leading-relaxed">
                       {pt}
@@ -93,8 +93,8 @@ export const Projects = () => {
 
               </div>
 
-              {/* Bottom Action Row: TelemetryButton handles both ON and OFF states cleanly */}
-              <div className="pt-6 border-t border-slate-800">
+              {/* Bottom Action Row */}
+              <div className="pt-7 border-t border-slate-800">
                 <TelemetryButton
                   traceData={{
                     title: `Project Endpoint Simulator: ${proj.title}`,
@@ -113,8 +113,7 @@ export const Projects = () => {
                     }
                   }}
                   label={`POST ${proj.telemetryPayload.endpoint.replace('POST ', '')}`}
-                  icon={Play}
-                  className="w-full justify-center text-xs py-3.5"
+                  className="w-full justify-center text-xs sm:text-sm py-4"
                 />
               </div>
 
