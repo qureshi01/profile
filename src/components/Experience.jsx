@@ -21,38 +21,38 @@ export const Experience = () => {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
             Professional <span className="gradient-text">Work Experience</span>
           </h2>
-          <p className="text-slate-400 max-w-2xl text-sm sm:text-lg leading-relaxed font-normal">
+          <p className="text-slate-400 max-w-2xl text-sm sm:text-base leading-relaxed font-normal">
             Track record of architecting production healthcare ERP microservices, integration pipelines, and full-stack web applications.
           </p>
         </div>
 
-        {/* Full-Width Enterprise Experience Panels */}
-        <div className="space-y-10 sm:space-y-12">
+        {/* Full-Width Enterprise Experience Panels with Authentic Padding */}
+        <div className="space-y-8 sm:space-y-10">
           {experienceData.map((exp, idx) => (
             <div
               key={idx}
-              className="glass-card p-7 sm:p-10 space-y-7 border border-slate-700/80 hover:border-cyan-500/60 shadow-2xl transition-all w-full"
+              className="glass-card p-6 sm:p-8 space-y-6 border border-slate-700/80 hover:border-cyan-500/60 shadow-xl transition-all w-full rounded-2xl"
             >
               
               {/* Company & Role Header Banner */}
-              <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 border-b border-slate-800 pb-6">
+              <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 border-b border-slate-800 pb-5">
                 
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-2xl bg-cyan-950/90 border border-cyan-500/40 flex items-center justify-center text-cyan-400 flex-shrink-0 mt-1 shadow-md">
-                    <Building2 className="w-6 h-6" />
+                <div className="flex items-start gap-3.5">
+                  <div className="w-11 h-11 rounded-xl bg-cyan-950/90 border border-cyan-500/40 flex items-center justify-center text-cyan-400 flex-shrink-0 mt-0.5 shadow-md">
+                    <Building2 className="w-5 h-5" />
                   </div>
 
                   <div>
                     <div className="flex items-center gap-3 flex-wrap">
-                      <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
+                      <h3 className="text-xl sm:text-2xl font-extrabold text-white">
                         {exp.role}
                       </h3>
-                      <span className="px-3.5 py-1 rounded-full text-xs font-mono font-bold bg-cyan-950 text-cyan-300 border border-cyan-500/40">
+                      <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-cyan-950 text-cyan-300 border border-cyan-500/40">
                         {exp.badge}
                       </span>
                     </div>
 
-                    <p className="text-base sm:text-lg font-semibold text-slate-300 mt-1 flex items-center gap-2">
+                    <p className="text-sm sm:text-base font-semibold text-slate-300 mt-1 flex items-center gap-2">
                       <span>{exp.company}</span>
                       <span className="text-slate-500">•</span>
                       <span className="text-xs font-mono text-cyan-400 font-normal">{exp.type}</span>
@@ -61,13 +61,13 @@ export const Experience = () => {
                 </div>
 
                 {/* Period & Location Pills */}
-                <div className="flex flex-wrap items-center gap-3 font-mono text-xs text-slate-300">
-                  <div className="flex items-center gap-2 bg-slate-950 px-4 py-2 rounded-xl border border-slate-800">
-                    <Calendar className="w-4 h-4 text-amber-400" />
+                <div className="flex flex-wrap items-center gap-2.5 font-mono text-xs text-slate-300">
+                  <div className="flex items-center gap-2 bg-slate-950 px-3.5 py-1.5 rounded-xl border border-slate-800">
+                    <Calendar className="w-3.5 h-3.5 text-amber-400" />
                     <span>{exp.period}</span>
                   </div>
-                  <div className="flex items-center gap-2 bg-slate-950 px-4 py-2 rounded-xl border border-slate-800">
-                    <MapPin className="w-4 h-4 text-emerald-400" />
+                  <div className="flex items-center gap-2 bg-slate-950 px-3.5 py-1.5 rounded-xl border border-slate-800">
+                    <MapPin className="w-3.5 h-3.5 text-emerald-400" />
                     <span>{exp.location}</span>
                   </div>
                 </div>
@@ -75,24 +75,24 @@ export const Experience = () => {
               </div>
 
               {/* Summary Description */}
-              <p className="text-slate-200 text-sm sm:text-base leading-relaxed font-normal">
+              <p className="text-slate-300 text-xs sm:text-base leading-relaxed font-normal">
                 {exp.summary}
               </p>
 
               {/* Key Deliverables Grid (Full 2-Column Responsive Layout) */}
               <div>
-                <h4 className="text-xs font-mono text-cyan-400 uppercase tracking-wider font-bold mb-4 flex items-center gap-2">
+                <h4 className="text-xs font-mono text-cyan-400 uppercase tracking-wider font-bold mb-3.5 flex items-center gap-2">
                   <Layers className="w-4 h-4" />
                   <span>Key Production Deliverables & Architectural Achievements</span>
                 </h4>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
                   {exp.highlights.map((item, hIdx) => (
                     <div
                       key={hIdx}
-                      className="flex items-start gap-3.5 p-4 rounded-xl bg-slate-950/80 border border-slate-800/90 text-slate-300 text-xs sm:text-sm leading-relaxed"
+                      className="flex items-start gap-3 p-3.5 rounded-xl bg-slate-950/80 border border-slate-800/90 text-slate-300 text-xs sm:text-sm leading-relaxed"
                     >
-                      <CheckCircle2 className="w-4.5 h-4.5 text-cyan-400 flex-shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
                       <span>{item}</span>
                     </div>
                   ))}
@@ -100,7 +100,7 @@ export const Experience = () => {
               </div>
 
               {/* Footer Row: Telemetry Action & Status */}
-              <div className="pt-6 border-t border-slate-800/80 flex flex-wrap justify-between items-center gap-4">
+              <div className="pt-5 border-t border-slate-800/80 flex flex-wrap justify-between items-center gap-3">
                 <TelemetryButton
                   traceData={{
                     title: `Experience Log: ${exp.company}`,
@@ -124,9 +124,10 @@ export const Experience = () => {
                   }}
                   label={`Inspect ${exp.telemetryEndpoint}`}
                   icon={Terminal}
+                  className="text-xs py-2.5 px-4"
                 />
 
-                <span className="text-xs font-mono text-emerald-400 font-semibold bg-emerald-950/80 border border-emerald-500/30 px-3.5 py-1.5 rounded-xl">
+                <span className="text-xs font-mono text-emerald-400 font-semibold bg-emerald-950/80 border border-emerald-500/30 px-3 py-1 rounded-lg">
                   ✓ Verified Production Experience
                 </span>
               </div>

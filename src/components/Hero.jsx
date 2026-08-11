@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Terminal, Download, ArrowRight, Server, Play } from 'lucide-react';
+import { Terminal, Download, ArrowRight, Server, Play, Sparkles, Activity, CheckCircle } from 'lucide-react';
 import { personalInfo, typingTexts } from '../data/portfolioData';
 import { useArchitecture } from '../context/ArchitectureContext';
 import { TelemetryButton } from './TelemetryButton';
 
 export const Hero = () => {
-  const { isDevToolsActive } = useArchitecture();
+  const { triggerTelemetry, isDevToolsActive } = useArchitecture();
   const [textIndex, setTextIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [displayedText, setDisplayedText] = useState('');
+  const [photoPinged, setPhotoPinged] = useState(false);
 
   // Typing animation effect inspired by reference site
   useEffect(() => {
@@ -33,6 +34,32 @@ export const Hero = () => {
 
     return () => clearTimeout(timer);
   }, [charIndex, isDeleting, textIndex]);
+
+  const handlePhotoClick = () => {
+    setPhotoPinged(true);
+    setTimeout(() => setPhotoPinged(false), 3000);
+
+    triggerTelemetry({
+      title: "Interactive Portrait Status Inspection",
+      endpoint: "GET /api/v1/architect/profile-status",
+      status: 200,
+      latency: "6ms",
+      traceId: "tr-photo-ping-2024",
+      steps: [
+        "1. Interactive click event captured on Architect Portrait Component",
+        "2. Querying live backend availability & microservice cluster",
+        "3. Spring Security verified public recruiter access",
+        "4. Returned 200 OK with live systems telemetry status"
+      ],
+      payload: {
+        developer: personalInfo.name,
+        role: personalInfo.role,
+        status: "ACTIVE_AND_AVAILABLE",
+        coreStack: ["Java 21", "Spring Boot", "Microservices", "Kafka", "Docker", "PostgreSQL"],
+        lastPingTime: new Date().toISOString()
+      }
+    });
+  };
 
   const heroTraceData = {
     title: "Hero Action: Microservice Dispatcher",
@@ -59,7 +86,7 @@ export const Hero = () => {
   };
 
   return (
-    <section id="home" className="relative pt-8 pb-16 md:pt-14 md:pb-24 overflow-hidden">
+    <section id="home" className="relative pt-6 pb-14 md:pt-12 md:pb-20 overflow-hidden">
       
       {/* Background Microservice Grid Glows */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-cyan-500/10 rounded-full blur-[160px] pointer-events-none"></div>
@@ -100,7 +127,6 @@ export const Hero = () => {
             {/* Action Buttons Responsive Grid */}
             <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-4 pt-2">
               
-              {/* Telemetry Button */}
               <TelemetryButton
                 traceData={heroTraceData}
                 label="Simulate Backend API Call"
@@ -108,13 +134,11 @@ export const Hero = () => {
                 className="w-full sm:w-auto justify-center text-sm py-3.5 px-7"
               />
 
-              {/* Contact Me */}
               <a href="#contact" className="btn-secondary w-full sm:w-auto justify-center text-sm py-3.5 px-7">
                 <span>Contact Me</span>
                 <ArrowRight className="w-4 h-4" />
               </a>
 
-              {/* Resume Quick Access */}
               <a
                 href="#about"
                 className="inline-flex items-center justify-center gap-2 text-slate-300 hover:text-cyan-400 font-mono text-xs px-5 py-3.5 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/40 transition-colors w-full sm:w-auto"
@@ -146,23 +170,35 @@ export const Hero = () => {
 
           </div>
 
-          {/* Right Column: Bigger & Prominent User Portrait Display */}
+          {/* Right Column: Interactive & Attractive Portrait Container */}
           <div className="lg:col-span-5 flex justify-center">
             <div className="relative w-full max-w-lg">
               
               {/* Multi-layer Vibrant Ambient Glow */}
               <div className="absolute -inset-2 bg-gradient-to-r from-cyan-500 via-indigo-500 to-amber-500 rounded-[38px] blur-2xl opacity-60 group-hover:opacity-100 transition duration-1000"></div>
 
-              <div className="relative glass-card p-6 sm:p-7 rounded-[36px] space-y-5 border-2 border-cyan-500/40 shadow-[0_0_50px_rgba(6,182,212,0.3)]">
+              <div
+                onClick={handlePhotoClick}
+                className="relative glass-card p-6 sm:p-7 rounded-[36px] space-y-5 border-2 border-cyan-500/40 shadow-[0_0_50px_rgba(6,182,212,0.35)] cursor-pointer group hover:scale-[1.01] transition-transform duration-300"
+                title="Click portrait to ping backend status!"
+              >
                 
-                {/* User Portrait Image Box (Bigger Aspect Ratio!) */}
-                <div className="relative overflow-hidden rounded-3xl bg-slate-950 border-2 border-cyan-500/50 h-[380px] sm:h-[480px] w-full shadow-2xl flex items-center justify-center group">
+                {/* User Portrait Image Box */}
+                <div className="relative overflow-hidden rounded-3xl bg-slate-950 border-2 border-cyan-500/50 h-[380px] sm:h-[480px] w-full shadow-2xl flex items-center justify-center">
                   
                   <img
                     src="/assets/profile.jpg"
                     alt={personalInfo.name}
                     className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 filter contrast-105"
                   />
+
+                  {/* Interactive Status Ping Overlay */}
+                  {photoPinged && (
+                    <div className="absolute top-4 right-4 bg-emerald-950/90 border border-emerald-500/60 text-emerald-300 text-xs font-mono px-3 py-1.5 rounded-xl shadow-2xl animate-bounce flex items-center gap-1.5">
+                      <Sparkles className="w-4 h-4 text-emerald-400" />
+                      <span>Ping 200 OK (6ms)</span>
+                    </div>
+                  )}
 
                   {/* Floating Microservice Live Router Tag */}
                   <div className="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-slate-950/90 backdrop-blur-md border border-cyan-500/30 text-xs font-mono flex items-center justify-between text-slate-300 shadow-2xl">

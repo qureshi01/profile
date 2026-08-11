@@ -1,5 +1,6 @@
 export const personalInfo = {
-  name: "Hashim Qureshi Chennadan",
+  name: "Hashim Qureshi",
+  fullName: "Hashim Qureshi Chennadan",
   role: "Software Engineer (Backend Developer)",
   title: "Backend Engineering Architect & Microservices Specialist",
   tagline: "Building high-throughput, fault-tolerant Java Spring Boot microservices, healthcare ERP compliance pipelines (FHIR/HL7, NPHIES, ZATCA), and asynchronous event architectures.",
@@ -7,7 +8,7 @@ export const personalInfo = {
   email: "hashimchennadan@gmail.com",
   phone: "+91 8943392653",
   linkedin: "https://www.linkedin.com/in/hashimqureshic",
-  github: "https://github.com",
+  github: "https://github.com/qureshi01",
   location: "India / Remote Available",
   profilePhoto: "/assets/profile.jpg",
   experienceYears: "3+",
@@ -141,7 +142,7 @@ export const projectsData = [
     title: "E-Commerce Microservices Platform",
     subtitle: "Spring Boot Microservices + Cloud Gateway + Eureka Discovery",
     category: "Microservices & Distributed Systems",
-    github: "https://github.com/hashimqureshic",
+    github: "https://github.com/qureshi01/profile",
     demoUrl: "#",
     badge: "Distributed Systems",
     architecture: {
@@ -179,7 +180,7 @@ export const projectsData = [
     title: "Clinical Appointment Booking System",
     subtitle: "React + Spring Boot + Health Vitals Tracker",
     category: "Healthcare & Full-Stack",
-    github: "https://github.com/hashimqureshic",
+    github: "https://github.com/qureshi01/profile",
     demoUrl: "#",
     badge: "Healthcare System",
     architecture: {
@@ -215,7 +216,7 @@ export const projectsData = [
     title: "MediPharma E-Commerce & Pharmacy Engine",
     subtitle: "React 18 Context API + Spring Boot 3 + Spring Mail",
     category: "E-Commerce & Pharmacy",
-    github: "https://github.com/hashimqureshic",
+    github: "https://github.com/qureshi01/profile",
     demoUrl: "#",
     badge: "Pharmacy Automation",
     architecture: {

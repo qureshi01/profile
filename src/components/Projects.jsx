@@ -22,23 +22,23 @@ export const Projects = () => {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
             Featured <span className="gradient-text">Backend Projects</span>
           </h2>
-          <p className="text-slate-400 max-w-2xl text-sm sm:text-lg leading-relaxed font-normal">
+          <p className="text-slate-400 max-w-2xl text-sm sm:text-base leading-relaxed font-normal">
             Microservices architectures, RESTful API ecosystems, and healthcare transaction platforms engineered for high reliability.
           </p>
         </div>
 
-        {/* Projects Cards Grid with Balanced Spacing and Luxury Card Padding */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 items-stretch">
+        {/* Projects Cards Grid with Matching Design Tokens & Authentic Padding */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
           {projectsData.map((proj) => (
             <div
               key={proj.id}
-              className="glass-card flex flex-col justify-between p-7 sm:p-9 space-y-7 border border-slate-700/80 hover:border-cyan-500/60 transition-all group h-full shadow-2xl"
+              className="glass-card flex flex-col justify-between p-6 sm:p-8 space-y-6 border border-slate-700/80 hover:border-cyan-500/60 transition-all group h-full shadow-xl rounded-2xl"
             >
-              <div className="space-y-6">
+              <div className="space-y-5">
                 
                 {/* Header Badge */}
                 <div className="flex justify-between items-center border-b border-slate-800/80 pb-4">
-                  <span className="px-3.5 py-1.5 rounded-xl font-mono text-xs font-bold bg-cyan-950/90 text-cyan-300 border border-cyan-500/40">
+                  <span className="px-3 py-1 rounded-lg font-mono text-xs font-bold bg-cyan-950/90 text-cyan-300 border border-cyan-500/40">
                     {proj.badge}
                   </span>
                   <div className="flex items-center gap-2 text-slate-400">
@@ -46,7 +46,7 @@ export const Projects = () => {
                       href={proj.github}
                       target="_blank"
                       rel="noreferrer"
-                      className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-500/50 hover:text-white transition-colors"
+                      className="p-2 rounded-lg bg-slate-900 border border-slate-800 hover:border-cyan-500/50 hover:text-white transition-colors"
                       title="View GitHub Repository"
                     >
                       <GithubIcon className="w-4 h-4" />
@@ -55,26 +55,26 @@ export const Projects = () => {
                 </div>
 
                 <div>
-                  <h3 className="text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors leading-snug">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors leading-snug">
                     {proj.title}
                   </h3>
-                  <p className="text-xs sm:text-sm font-mono text-cyan-400 mt-1.5">
+                  <p className="text-xs font-mono text-cyan-400 mt-1">
                     {proj.subtitle}
                   </p>
                 </div>
 
-                <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-normal">
+                <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-normal">
                   {proj.description}
                 </p>
 
-                {/* Architecture Key Features Panel with Generous Inner Padding */}
-                <div className="p-5 sm:p-6 rounded-2xl bg-slate-950/90 border border-slate-800 text-xs font-mono space-y-3 shadow-inner">
+                {/* Architecture Key Features Panel */}
+                <div className="p-5 rounded-xl bg-slate-950/90 border border-slate-800 text-xs font-mono space-y-2.5 shadow-inner">
                   <span className="text-cyan-400 font-bold block text-xs uppercase tracking-wider">
                     ⚡ Backend Architectural Specs
                   </span>
                   <div className="space-y-2 text-slate-300 text-xs">
                     {Object.entries(proj.architecture).map(([key, val], aIdx) => (
-                      <div key={aIdx} className="flex justify-between items-center border-b border-slate-900 pb-2">
+                      <div key={aIdx} className="flex justify-between items-center border-b border-slate-900 pb-1.5">
                         <span className="text-slate-400 capitalize">{key}:</span>
                         <span className="text-cyan-300 font-semibold text-right pl-2 truncate">{val}</span>
                       </div>
@@ -83,7 +83,7 @@ export const Projects = () => {
                 </div>
 
                 {/* Technical Bullet Highlights */}
-                <ul className="space-y-2.5 text-xs sm:text-sm text-slate-300 list-disc list-inside">
+                <ul className="space-y-2 text-xs text-slate-300 list-disc list-inside">
                   {proj.points.slice(0, 3).map((pt, ptIdx) => (
                     <li key={ptIdx} className="leading-relaxed">
                       {pt}
@@ -94,7 +94,7 @@ export const Projects = () => {
               </div>
 
               {/* Bottom Action Row */}
-              <div className="pt-6 border-t border-slate-800">
+              <div className="pt-5 border-t border-slate-800">
                 <TelemetryButton
                   traceData={{
                     title: `Project Endpoint Simulator: ${proj.title}`,
@@ -113,7 +113,7 @@ export const Projects = () => {
                     }
                   }}
                   label={`POST ${proj.telemetryPayload.endpoint.replace('POST ', '')}`}
-                  className="w-full justify-center text-xs sm:text-sm py-3.5"
+                  className="w-full justify-center text-xs py-3"
                 />
               </div>
 
