@@ -6,80 +6,67 @@ import { TelemetryButton } from './TelemetryButton';
 
 export const Projects = () => {
   return (
-    <section id="projects" className="py-24 sm:py-32 my-12 sm:my-20 border-t border-b border-slate-800/80 relative">
+    <section id="projects" className="section-sep py-24 sm:py-32">
       <div className="container-custom">
-        
-        {/* Section Title Header */}
-        <div className="flex flex-col items-center text-center mb-16 sm:mb-20 space-y-4">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-md bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 text-xs font-mono shadow-md">
-            <Layers className="w-3.5 h-3.5" />
-            <span>ENTERPRISE MICROSERVICES PORTFOLIO</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-            Featured <span className="gradient-text">Backend Projects</span>
-          </h2>
-          <p className="text-slate-400 max-w-2xl text-base sm:text-lg leading-relaxed pt-1">
-            Microservices architectures, RESTful API ecosystems, and healthcare transaction platforms engineered for high reliability.
-          </p>
+
+        {/* Section heading */}
+        <div className="section-title">
+          <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-[var(--bg-elevated)] border border-[var(--border-default)] text-[var(--cyan)] text-[11px] font-mono mb-6">
+            <Layers className="w-3.5 h-3.5" /> ENTERPRISE MICROSERVICES PORTFOLIO
+          </span>
+          <h2>Featured <span className="gradient-text">Backend Projects</span></h2>
+          <p>Microservices architectures, RESTful API ecosystems, and healthcare transaction platforms engineered for high reliability.</p>
         </div>
 
-        {/* Projects Cards Grid with Square Borders & Generous Text Padding */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+        {/* Projects grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
           {projectsData.map((proj) => (
-            <div
-              key={proj.id}
-              className="glass-card p-7 sm:p-8 flex flex-col justify-between space-y-6 hover:border-cyan-500/50 transition-all group h-full shadow-xl rounded-lg"
-            >
-              <div className="space-y-5">
-                
-                {/* Header Badge */}
-                <div className="flex justify-between items-center border-b border-slate-800/80 pb-4">
-                  <span className="px-3 py-1 rounded-md font-mono text-xs font-bold bg-cyan-950 text-cyan-400 border border-cyan-500/30">
-                    {proj.badge}
-                  </span>
-                  <a
-                    href={proj.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="p-2 rounded-md bg-slate-900 border border-slate-800 hover:border-cyan-500/50 hover:text-white transition-colors text-slate-400"
-                    title="View GitHub Repository"
-                  >
+            <div key={proj.id} className="card flex flex-col justify-between space-y-5 group h-full">
+
+              {/* Top content */}
+              <div className="space-y-4">
+
+                {/* Badge + GitHub row */}
+                <div className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-4">
+                  <span className="tag tag-cyan">{proj.badge}</span>
+                  <a href={proj.github} target="_blank" rel="noreferrer"
+                    className="w-8 h-8 rounded-md bg-[var(--bg-surface)] border border-[var(--border-default)] flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--cyan)] hover:border-[var(--border-accent)] transition-all"
+                    title="View GitHub Repo">
                     <GithubIcon className="w-4 h-4" />
                   </a>
                 </div>
 
+                {/* Title */}
                 <div>
-                  <h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
+                  <h3 className="font-bold text-[var(--text-primary)] text-lg group-hover:text-[var(--cyan-lt)] transition-colors leading-snug">
                     {proj.title}
                   </h3>
-                  <p className="text-xs font-mono text-slate-400 mt-1.5">
-                    {proj.subtitle}
-                  </p>
+                  <p className="text-[11px] font-mono text-[var(--text-muted)] mt-1">{proj.subtitle}</p>
                 </div>
 
-                <p className="text-slate-300 text-xs sm:text-sm leading-relaxed my-2">
+                {/* Description */}
+                <p className="text-[var(--text-secondary)] text-xs leading-relaxed">
                   {proj.description}
                 </p>
 
-                {/* Architecture Specs Box with Square Borders */}
-                <div className="p-4 sm:p-5 my-3 rounded-md bg-slate-900/60 border border-slate-800 text-xs font-mono space-y-2.5">
-                  <span className="text-slate-400 font-bold block text-[11px] uppercase tracking-wider">
-                    ⚡ Backend Architectural Specs
-                  </span>
-                  <div className="space-y-1.5 text-slate-300 text-[11px]">
+                {/* Architecture specs */}
+                <div className="inner-box space-y-2">
+                  <p className="text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-wider font-bold">⚡ Architecture Specs</p>
+                  <div className="space-y-1.5">
                     {Object.entries(proj.architecture).map(([key, val], aIdx) => (
-                      <div key={aIdx} className="flex justify-between items-center border-b border-slate-900 pb-1">
-                        <span className="text-slate-400 capitalize">{key}:</span>
-                        <span className="text-cyan-300 font-semibold pl-2 truncate">{val}</span>
+                      <div key={aIdx} className="flex justify-between items-center text-[11px] font-mono">
+                        <span className="text-[var(--text-muted)] capitalize">{key}:</span>
+                        <span className="text-[var(--cyan)] font-semibold truncate ml-2">{val}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Technical Bullet Highlights */}
-                <ul className="space-y-2.5 text-xs text-slate-300 list-disc list-inside my-2">
+                {/* Bullet points */}
+                <ul className="space-y-1.5">
                   {proj.points.slice(0, 3).map((pt, ptIdx) => (
-                    <li key={ptIdx} className="leading-relaxed">
+                    <li key={ptIdx} className="flex items-start gap-2 text-xs text-[var(--text-secondary)] leading-relaxed">
+                      <span className="text-[var(--cyan)] mt-0.5 flex-shrink-0">›</span>
                       {pt}
                     </li>
                   ))}
@@ -87,28 +74,26 @@ export const Projects = () => {
 
               </div>
 
-              {/* Bottom Action Row */}
-              <div className="pt-5 border-t border-slate-800 flex items-center justify-between">
+              {/* Bottom action */}
+              <div className="pt-4 border-t border-[var(--border-subtle)]">
                 <TelemetryButton
                   traceData={{
-                    title: `Project Endpoint Simulator: ${proj.title}`,
+                    title: `Project Simulator: ${proj.title}`,
                     endpoint: proj.telemetryPayload.endpoint,
                     status: proj.telemetryPayload.status,
                     latency: proj.telemetryPayload.latency,
                     traceId: proj.telemetryPayload.traceId,
                     steps: proj.telemetryPayload.steps,
                     payload: {
-                      projectId: proj.id,
-                      title: proj.title,
+                      projectId: proj.id, title: proj.title,
                       architectureSpecs: proj.architecture,
                       activeEndpoints: [proj.telemetryPayload.endpoint],
-                      securityModel: "JWT Bearer + Spring Security Filter Chain",
-                      dbPattern: proj.architecture.pattern || "Isolated PostgreSQL Instance"
+                      securityModel: "JWT Bearer + Spring Security",
                     }
                   }}
-                  label={`POST ${proj.telemetryPayload.endpoint.replace('POST ', '')}`}
+                  label={`Run ${proj.telemetryPayload.endpoint.replace('POST ', '')}`}
                   icon={Play}
-                  className="w-full justify-center text-xs"
+                  className="w-full justify-center"
                 />
               </div>
 

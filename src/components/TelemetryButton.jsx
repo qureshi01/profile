@@ -9,29 +9,28 @@ export const TelemetryButton = ({ traceData, label, className = "", icon: Icon =
     return (
       <button
         onClick={() => triggerTelemetry(traceData)}
-        className={`btn-telemetry ${className}`}
+        className={`btn btn-telemetry ${className}`}
         title="Simulate Live Backend Request Trace"
       >
-        <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping flex-shrink-0"></span>
-        <Icon className="w-4 h-4 flex-shrink-0 text-cyan-400" />
-        <span className="whitespace-nowrap font-mono">{label}</span>
+        <span className="dot-sm"></span>
+        <Icon className="w-3.5 h-3.5 flex-shrink-0" />
+        <span>{label}</span>
       </button>
     );
   }
 
-  // When Telemetry is OFF: Render as an elegant read-only API endpoint badge with square borders!
   return (
     <div
+      className={`group relative btn btn-secondary text-[var(--text-muted)] cursor-not-allowed ${className}`}
       onClick={() => triggerTelemetry(traceData)}
-      className={`group relative btn-secondary text-slate-400 font-mono cursor-not-allowed opacity-90 border border-slate-800 bg-slate-950/90 hover:border-slate-700 ${className}`}
-      title="Turn ON Telemetry in top bar to discover live request traces!"
+      title="Enable Telemetry to run live traces"
     >
-      <Lock className="w-4 h-4 text-slate-500 flex-shrink-0" />
-      <span className="whitespace-nowrap font-mono">{label}</span>
-
-      {/* Hover Tooltip Hint */}
-      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2.5 hidden group-hover:block w-max max-w-xs bg-slate-900 border border-slate-700 text-amber-300 text-[11px] p-3 rounded-lg shadow-2xl z-50 text-center font-mono pointer-events-none">
-        💡 Turn ON Telemetry in top bar to discover live request traces!
+      <Lock className="w-3.5 h-3.5 flex-shrink-0" />
+      <span>{label}</span>
+      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block z-50 pointer-events-none">
+        <div className="bg-[#0d1424] border border-[var(--border-default)] text-amber-300 text-[11px] font-mono px-3 py-2 rounded-md shadow-xl whitespace-nowrap">
+          💡 Enable Telemetry in the navbar to explore live traces
+        </div>
       </div>
     </div>
   );
