@@ -1,11 +1,11 @@
 import React from 'react';
-import { Briefcase, Calendar, MapPin, CheckCircle2, Cpu, Layers, Building2, Terminal } from 'lucide-react';
+import { Briefcase, Calendar, MapPin, CheckCircle2, Layers, Building2, Terminal } from 'lucide-react';
 import { experienceData } from '../data/portfolioData';
 import { TelemetryButton } from './TelemetryButton';
 
 export const Experience = () => {
   return (
-    <section id="experience" className="py-24 sm:py-36 bg-[#070b14] border-t border-b border-slate-800/80 relative my-12">
+    <section id="experience" className="py-16 sm:py-24 bg-[#070b14] border-t border-b border-slate-800/80 relative">
       
       {/* Background Decorative Halo */}
       <div className="absolute top-1/3 right-10 w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[140px] pointer-events-none"></div>
@@ -13,7 +13,7 @@ export const Experience = () => {
       <div className="container-custom relative z-10">
         
         {/* Section Title */}
-        <div className="flex flex-col items-center text-center mb-16 sm:mb-24 space-y-4">
+        <div className="flex flex-col items-center text-center mb-12 sm:mb-16 space-y-3">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-950/80 border border-cyan-500/40 text-cyan-400 text-xs font-mono shadow-md">
             <Briefcase className="w-4 h-4" />
             <span>ENTERPRISE PRODUCTION HISTORY</span>
@@ -26,12 +26,12 @@ export const Experience = () => {
           </p>
         </div>
 
-        {/* Full-Width Enterprise Experience Panels (No Empty Spaces!) */}
-        <div className="space-y-10 sm:space-y-16">
+        {/* Full-Width Enterprise Experience Panels */}
+        <div className="space-y-10 sm:space-y-12">
           {experienceData.map((exp, idx) => (
             <div
               key={idx}
-              className="glass-card p-7 sm:p-12 space-y-8 border border-slate-700/80 hover:border-cyan-500/60 shadow-2xl transition-all w-full"
+              className="glass-card p-7 sm:p-10 space-y-7 border border-slate-700/80 hover:border-cyan-500/60 shadow-2xl transition-all w-full"
             >
               
               {/* Company & Role Header Banner */}
@@ -75,7 +75,7 @@ export const Experience = () => {
               </div>
 
               {/* Summary Description */}
-              <p className="text-slate-200 text-sm sm:text-lg leading-relaxed font-normal">
+              <p className="text-slate-200 text-sm sm:text-base leading-relaxed font-normal">
                 {exp.summary}
               </p>
 
@@ -90,7 +90,7 @@ export const Experience = () => {
                   {exp.highlights.map((item, hIdx) => (
                     <div
                       key={hIdx}
-                      className="flex items-start gap-3.5 p-4 sm:p-5 rounded-xl bg-slate-950/80 border border-slate-800/90 text-slate-300 text-xs sm:text-sm leading-relaxed"
+                      className="flex items-start gap-3.5 p-4 rounded-xl bg-slate-950/80 border border-slate-800/90 text-slate-300 text-xs sm:text-sm leading-relaxed"
                     >
                       <CheckCircle2 className="w-4.5 h-4.5 text-cyan-400 flex-shrink-0 mt-0.5" />
                       <span>{item}</span>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Award, ShieldCheck, Eye, Terminal } from 'lucide-react';
 import { certificateData } from '../data/portfolioData';
 import { TelemetryButton } from './TelemetryButton';
@@ -37,141 +38,95 @@ export const Certificates = () => {
     }
   };
 
-  return (
-    <section id="certificates" className="py-24 sm:py-36 bg-[#090f1d] border-t border-b border-slate-800/80 relative my-12">
-      
-      {/* Decorative Glow Ambient Halo */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-amber-500/5 rounded-full blur-[140px] pointer-events-none"></div>
+  const details = [
+    { label: 'Presented To', value: certificateData.issuedTo },
+    { label: 'Certificate Code', value: certificateData.certificateCode, highlight: true },
+    { label: 'Internship Period', value: certificateData.period },
+    { label: 'Date of Issue', value: certificateData.issueDate },
+  ];
 
+  return (
+    <section id="certificates" className="section section-alt relative">
       <div className="container-custom relative z-10">
-        
-        {/* Section Title */}
-        <div className="flex flex-col items-center text-center mb-16 sm:mb-24 space-y-4">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-950/80 border border-amber-500/40 text-amber-400 text-xs font-mono shadow-md">
-            <Award className="w-4 h-4" />
-            <span>VERIFIED ACADEMIC & INDUSTRY CREDENTIALS</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-            Official <span className="gradient-gold">Certifications</span>
-          </h2>
-          <p className="text-slate-400 max-w-2xl text-sm sm:text-lg leading-relaxed font-normal">
+        <div className="section-header">
+          <span className="section-badge chip-amber bg-amber-500/10 border-amber-500/25 text-amber-400">
+            <Award className="w-3.5 h-3.5" /> Certificates
+          </span>
+          <h2 className="section-title">Official <span className="gradient-gold">Certifications</span></h2>
+          <p className="section-desc">
             Verified internship completions and full-stack software development credentials.
           </p>
         </div>
 
-        {/* Certificate Card Container */}
-        <div className="max-w-5xl mx-auto glass-card p-7 sm:p-12 border border-amber-500/30 shadow-[0_0_50px_rgba(245,158,11,0.12)]">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            
-            {/* Left Column: Image Thumbnail */}
-            <div className="lg:col-span-5 relative group overflow-hidden rounded-2xl border border-slate-700 bg-slate-950 aspect-[3/4] flex items-center justify-center shadow-2xl">
+        <div className="max-w-4xl mx-auto glass-card card-pad border-amber-500/20">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
+            <div className="md:col-span-5 relative group overflow-hidden rounded-2xl border border-white/10 bg-slate-950 aspect-[3/4] max-w-sm mx-auto md:max-w-none w-full">
               <img
                 src={certificateData.image}
                 alt={certificateData.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover"
                 onError={(e) => {
                   e.target.onerror = null;
                   e.target.src = '/assets/resume-page1.png';
                 }}
               />
-              
-              {/* Overlay View Button */}
-              <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3 p-4">
-                <button
-                  onClick={() => setShowImageModal(true)}
-                  className="btn-primary text-xs py-3 px-6"
-                >
+              <div className="absolute inset-0 bg-slate-950/70 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-6">
+                <button onClick={() => setShowImageModal(true)} className="btn-primary text-sm">
                   <Eye className="w-4 h-4" />
-                  <span>Inspect Full Certificate</span>
+                  View Full
                 </button>
               </div>
             </div>
 
-            {/* Right Column: Certificate Metadata */}
-            <div className="lg:col-span-7 space-y-6">
-              
-              <div className="space-y-3">
-                <span className="px-3.5 py-1 rounded-full font-mono text-xs font-bold bg-amber-950/90 text-amber-300 border border-amber-500/40 inline-flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                  <span>Verified Credentials</span>
+            <div className="md:col-span-7 stack-lg">
+              <div className="stack-md">
+                <span className="chip chip-amber">
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                  Verified
                 </span>
-
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
-                  {certificateData.title}
-                </h3>
-                <p className="text-sm font-semibold text-cyan-400 font-mono">
-                  {certificateData.role} • {certificateData.issuer}
+                <h3 className="text-2xl font-bold text-white leading-snug">{certificateData.title}</h3>
+                <p className="text-sm text-sky-400 font-medium leading-relaxed">
+                  {certificateData.role} · {certificateData.issuer}
                 </p>
               </div>
 
-              {/* Certificate Details Table */}
-              <div className="space-y-3 font-mono text-xs text-slate-300 bg-slate-950/90 p-5 rounded-2xl border border-slate-800 shadow-inner">
-                <div className="flex justify-between items-center border-b border-slate-800/80 pb-2.5">
-                  <span className="text-slate-400">Presented To:</span>
-                  <span className="text-white font-bold text-xs sm:text-sm">{certificateData.issuedTo}</span>
-                </div>
-                <div className="flex justify-between items-center border-b border-slate-800/80 pb-2.5">
-                  <span className="text-slate-400">Certificate Code:</span>
-                  <span className="text-amber-400 font-bold text-xs sm:text-sm">{certificateData.certificateCode}</span>
-                </div>
-                <div className="flex justify-between items-center border-b border-slate-800/80 pb-2.5">
-                  <span className="text-slate-400">Internship Period:</span>
-                  <span className="text-slate-200 text-xs sm:text-sm">{certificateData.period}</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-400">Date of Issue:</span>
-                  <span className="text-slate-200 text-xs sm:text-sm">{certificateData.issueDate}</span>
-                </div>
+              <div className="card-inner stack-sm text-sm">
+                {details.map(({ label, value, highlight }) => (
+                  <div key={label} className="flex justify-between items-start gap-6 py-2 border-b border-white/5 last:border-0">
+                    <span className="text-slate-500 flex-shrink-0">{label}</span>
+                    <span className={`text-right font-medium leading-relaxed ${highlight ? 'text-amber-400 font-mono text-xs' : 'text-slate-200'}`}>
+                      {value}
+                    </span>
+                  </div>
+                ))}
               </div>
 
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-4 pt-2">
-                <button
-                  onClick={() => setShowImageModal(true)}
-                  className="btn-primary text-xs py-3 px-6"
-                >
+              <div className="btn-group pt-2">
+                <button onClick={() => setShowImageModal(true)} className="btn-primary text-sm">
                   <Eye className="w-4 h-4" />
-                  <span>Preview Full Certificate</span>
+                  Preview Certificate
                 </button>
-
-                <TelemetryButton
-                  traceData={certTraceData}
-                  label="Verify RSA-256 JWT Token"
-                  icon={Terminal}
-                />
+                <TelemetryButton traceData={certTraceData} label="Verify JWT" icon={Terminal} />
               </div>
-
             </div>
-
           </div>
         </div>
-
       </div>
 
-      {/* Full Certificate Preview Modal */}
-      {showImageModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-lg animate-fade-in">
-          <div className="bg-[#0b1329] border border-amber-500/40 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 space-y-4 shadow-[0_0_60px_rgba(0,0,0,0.8)]">
-            <div className="flex justify-between items-center border-b border-slate-800 pb-4">
-              <h3 className="font-bold text-white font-mono text-xs sm:text-base flex items-center gap-2">
+      {showImageModal && createPortal(
+        <div className="modal-overlay" onClick={() => setShowImageModal(false)}>
+          <div className="modal-panel modal-panel-lg stack-md" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h3 className="font-bold text-white flex items-center gap-2 text-sm sm:text-base">
                 <Award className="w-5 h-5 text-amber-400" />
-                AiVariant Certificate - {certificateData.certificateCode}
+                {certificateData.certificateCode}
               </h3>
-              <button
-                onClick={() => setShowImageModal(false)}
-                className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
-              >
-                ✕
-              </button>
+              <button onClick={() => setShowImageModal(false)} className="nav-help-btn">✕</button>
             </div>
-
-            <img
-              src={certificateData.image}
-              alt="AiVariant Certificate"
-              className="w-full rounded-xl border border-slate-800 shadow-2xl"
-            />
+            <img src={certificateData.image} alt="Certificate" className="w-full rounded-xl border border-white/10" />
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </section>
   );

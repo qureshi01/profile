@@ -14,14 +14,9 @@ import { Footer } from './components/Footer';
 function App() {
   return (
     <ArchitectureProvider>
-      <div className="min-h-screen bg-[#090d16] text-slate-100 selection:bg-cyan-500 selection:text-black">
-        {/* Live Backend Telemetry Visualizer Drawer */}
+      <div className="min-h-screen bg-[#070b14] text-slate-100 selection:bg-sky-500/30 selection:text-white">
         <ArchitectureVisualizer />
-
-        {/* Global Navigation Header */}
         <Navbar />
-
-        {/* Main Content Sections */}
         <main>
           <Hero />
           <About />
@@ -31,8 +26,6 @@ function App() {
           <Certificates />
           <Contact />
         </main>
-
-        {/* Global Footer */}
         <Footer />
       </div>
     </ArchitectureProvider>
