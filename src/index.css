@@ -274,6 +274,7 @@ h1,h2,h3,h4,h5,h6 { font-family: var(--font-head); letter-spacing: -0.025em; }
    SECTION HEADING BLOCK (reusable)
 ───────────────────────────────────────────── */
 .section-title { margin-bottom:4rem; text-align:center; }
+.section-title > span:first-child { display:inline-flex; margin-bottom:1.25rem; }
 .section-title h2 { font-size:clamp(1.875rem,4vw,3rem); font-weight:800; color:var(--text-primary); }
 .section-title p  { color:var(--text-secondary); font-size:1rem; margin-top:0.875rem; max-width:42rem; margin-left:auto; margin-right:auto; line-height:1.75; }
 @media (max-width:640px) { .section-title { margin-bottom:2.5rem; } .section-title h2 { font-size: 1.75rem; } }

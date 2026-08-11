@@ -3,6 +3,7 @@ import { ArrowRight, Download, Server, Play, Sparkles, MapPin } from 'lucide-rea
 import { personalInfo, typingTexts } from '../data/portfolioData';
 import { useArchitecture } from '../context/ArchitectureContext';
 import { TelemetryButton } from './TelemetryButton';
+import { asset } from '../utils/asset';
 
 export const Hero = () => {
   const { triggerTelemetry } = useArchitecture();
@@ -168,7 +169,7 @@ export const Hero = () => {
                 <div className="relative overflow-hidden rounded-lg border border-[var(--border-accent)] shadow-2xl"
                   style={{ aspectRatio: '4/5' }}>
                   <img
-                    src="/assets/profile.jpg"
+                    src={asset('assets/profile.jpg')}
                     alt={personalInfo.name}
                     className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
                   />

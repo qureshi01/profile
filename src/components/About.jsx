@@ -3,6 +3,7 @@ import { User, GraduationCap, Globe, Mail, Phone, MapPin, FileText, CheckCircle2
 import { personalInfo } from '../data/portfolioData';
 import { useArchitecture } from '../context/ArchitectureContext';
 import { TelemetryButton } from './TelemetryButton';
+import { asset } from '../utils/asset';
 
 export const About = () => {
   const { isDevToolsActive } = useArchitecture();
@@ -95,10 +96,14 @@ export const About = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 {personalInfo.education.map((edu, idx) => (
                   <div key={idx} className="card space-y-3">
-                    {/* Badge row — always inline */}
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="tag tag-amber flex-shrink-0">{edu.badge}</span>
-                      <span className="text-[10px] font-mono text-[var(--text-muted)] whitespace-nowrap">{edu.period}</span>
+                    {/* Badge + period — always on one line, no wrapping */}
+                    <div className="flex items-center justify-between gap-2 overflow-hidden">
+                      <span className="inline-flex items-center font-mono text-[10px] font-bold px-2 py-1 rounded bg-amber-950/60 text-amber-300 border border-amber-500/30 whitespace-nowrap overflow-hidden text-ellipsis max-w-[55%]">
+                        {edu.badge}
+                      </span>
+                      <span className="text-[10px] font-mono text-[var(--text-muted)] whitespace-nowrap flex-shrink-0">
+                        {edu.period}
+                      </span>
                     </div>
                     <div>
                       <p className="font-bold text-[var(--text-primary)] text-sm leading-snug">{edu.degree}</p>
@@ -184,7 +189,7 @@ export const About = () => {
               {['resume-page1','resume-page2'].map((p, i) => (
                 <div key={i}>
                   <p className="text-[10px] font-mono text-[var(--cyan)] mb-2">Page {i+1}</p>
-                  <img src={`/assets/${p}.png`} alt={`Resume page ${i+1}`}
+                  <img src={asset(`assets/${p}.png`)} alt={`Resume page ${i+1}`}
                     className="w-full rounded-lg border border-[var(--border-default)] shadow-2xl" />
                 </div>
               ))}
