@@ -33,10 +33,10 @@ export const About = () => {
   };
 
   return (
-    <section id="about" className="py-20 sm:py-28 bg-slate-950/60 border-t border-b border-slate-800/80 relative">
+    <section id="about" className="py-24 sm:py-32 my-12 sm:my-20 bg-slate-950/60 border-t border-b border-slate-800/80 relative">
       <div className="container-custom">
         
-        {/* Section Title with Uncollapsed Spacing */}
+        {/* Section Title with Distinct Uncollapsed Spacing */}
         <div className="flex flex-col items-center text-center mb-16 sm:mb-20 space-y-4">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 text-xs font-mono shadow-md">
             <User className="w-3.5 h-3.5" />
@@ -119,16 +119,16 @@ export const About = () => {
 
             </div>
 
-            {/* Education Cards */}
-            <div className="space-y-4">
+            {/* Education Cards with Distinct Separation */}
+            <div className="space-y-6">
               <h3 className="text-lg font-bold text-white flex items-center gap-2 font-mono">
                 <GraduationCap className="w-5 h-5 text-amber-400" />
                 <span>Education & Professional Certifications</span>
               </h3>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {personalInfo.education.map((edu, idx) => (
-                  <div key={idx} className="glass-card p-5 space-y-2 flex flex-col justify-between">
+                  <div key={idx} className="glass-card p-6 space-y-3 flex flex-col justify-between">
                     <div className="space-y-2">
                       <div className="flex items-center justify-between">
                         <span className="text-[11px] font-mono px-2.5 py-0.5 rounded bg-amber-950/60 border border-amber-500/30 text-amber-300 font-bold">

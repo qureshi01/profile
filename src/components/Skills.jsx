@@ -4,10 +4,10 @@ import { skillsCategory } from '../data/portfolioData';
 import { TelemetryButton } from './TelemetryButton';
 
 const categoryIcons = {
-  Server: <Server className="w-5 h-5 text-cyan-400" />,
-  Cloud: <Cloud className="w-5 h-5 text-indigo-400" />,
-  Database: <Database className="w-5 h-5 text-emerald-400" />,
-  Layout: <Layout className="w-5 h-5 text-amber-400" />
+  Server: <Server className="w-4 h-4 text-cyan-400 flex-shrink-0" />,
+  Cloud: <Cloud className="w-4 h-4 text-indigo-400 flex-shrink-0" />,
+  Database: <Database className="w-4 h-4 text-emerald-400 flex-shrink-0" />,
+  Layout: <Layout className="w-4 h-4 text-amber-400 flex-shrink-0" />
 };
 
 export const Skills = () => {
@@ -36,10 +36,10 @@ export const Skills = () => {
   };
 
   return (
-    <section id="skills" className="py-20 sm:py-28 relative">
+    <section id="skills" className="py-24 sm:py-32 my-12 sm:my-20 border-t border-slate-800/80 relative">
       <div className="container-custom">
         
-        {/* Section Title with Uncollapsed Spacing */}
+        {/* Section Title with Uncollapsed Margin Spacing */}
         <div className="flex flex-col items-center text-center mb-16 sm:mb-20 space-y-4">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 text-xs font-mono shadow-md">
             <Code2 className="w-3.5 h-3.5" />
@@ -53,20 +53,20 @@ export const Skills = () => {
           </p>
         </div>
 
-        {/* Category Selector Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
+        {/* Category Selector Tabs - Strictly Single-Line Headers */}
+        <div className="flex flex-wrap items-center justify-center gap-3 mb-12">
           {skillsCategory.map((cat, idx) => (
             <button
               key={idx}
               onClick={() => setActiveCategory(idx)}
-              className={`btn-secondary text-xs sm:text-sm font-semibold border ${
+              className={`whitespace-nowrap inline-flex items-center gap-2 px-4.5 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-semibold transition-all border ${
                 activeCategory === idx
                   ? 'bg-cyan-950/90 border-cyan-500 text-white shadow-[0_0_20px_rgba(6,182,212,0.35)] scale-105'
                   : 'bg-slate-900/80 border-slate-800 text-slate-400 hover:border-slate-700 hover:text-slate-200'
               }`}
             >
               {categoryIcons[cat.icon]}
-              <span>{cat.category}</span>
+              <span className="whitespace-nowrap">{cat.category}</span>
             </button>
           ))}
         </div>

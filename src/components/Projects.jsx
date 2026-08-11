@@ -6,48 +6,46 @@ import { TelemetryButton } from './TelemetryButton';
 
 export const Projects = () => {
   return (
-    <section id="projects" className="py-20 relative">
+    <section id="projects" className="py-24 sm:py-32 my-12 sm:my-20 border-t border-b border-slate-800/80 relative">
       <div className="container-custom">
         
-        {/* Section Title - Identical to About & Skills */}
-        <div className="flex flex-col items-center text-center mb-14 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 text-xs font-mono">
+        {/* Section Title - Uncollapsed Margin Spacing */}
+        <div className="flex flex-col items-center text-center mb-16 sm:mb-20 space-y-4">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 text-xs font-mono shadow-md">
             <Layers className="w-3.5 h-3.5" />
             <span>ENTERPRISE MICROSERVICES PORTFOLIO</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
             Featured <span className="gradient-text">Backend Projects</span>
           </h2>
-          <p className="text-slate-400 max-w-2xl text-sm sm:text-base">
+          <p className="text-slate-400 max-w-2xl text-base sm:text-lg leading-relaxed pt-1">
             Microservices architectures, RESTful API ecosystems, and healthcare transaction platforms engineered for high reliability.
           </p>
         </div>
 
-        {/* Projects Cards Grid - Identical card tokens to About & Skills */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+        {/* Projects Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
           {projectsData.map((proj) => (
             <div
               key={proj.id}
-              className="glass-card p-6 flex flex-col justify-between space-y-6 hover:border-cyan-500/50 transition-all group h-full"
+              className="glass-card p-6 sm:p-7 flex flex-col justify-between space-y-6 hover:border-cyan-500/50 transition-all group h-full shadow-xl"
             >
               <div className="space-y-4">
                 
                 {/* Header Badge */}
-                <div className="flex justify-between items-center border-b border-slate-800 pb-3">
-                  <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-semibold bg-cyan-950 text-cyan-400 border border-cyan-500/30">
+                <div className="flex justify-between items-center border-b border-slate-800 pb-3.5">
+                  <span className="px-3 py-1 rounded text-xs font-mono font-bold bg-cyan-950 text-cyan-400 border border-cyan-500/30">
                     {proj.badge}
                   </span>
-                  <div className="flex items-center gap-2 text-slate-400">
-                    <a
-                      href={proj.github}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="p-1.5 rounded hover:bg-slate-800 hover:text-white transition-colors"
-                      title="View GitHub Repository"
-                    >
-                      <GithubIcon className="w-4 h-4" />
-                    </a>
-                  </div>
+                  <a
+                    href={proj.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-500/50 hover:text-white transition-colors text-slate-400"
+                    title="View GitHub Repository"
+                  >
+                    <GithubIcon className="w-4 h-4" />
+                  </a>
                 </div>
 
                 <div>
@@ -63,9 +61,9 @@ export const Projects = () => {
                   {proj.description}
                 </p>
 
-                {/* Architecture Key Features Panel - Identical sub-item token to About & Skills */}
-                <div className="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 text-xs font-mono space-y-2">
-                  <span className="text-slate-500 block text-[10px] uppercase font-bold tracking-wider">
+                {/* Architecture Key Features Panel */}
+                <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 text-xs font-mono space-y-2">
+                  <span className="text-slate-400 font-bold block text-[11px] uppercase tracking-wider">
                     ⚡ Backend Architectural Specs
                   </span>
                   <div className="space-y-1 text-slate-300 text-[11px]">

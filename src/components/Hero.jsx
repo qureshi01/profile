@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Terminal, Download, ArrowRight, Server, Play, Sparkles } from 'lucide-react';
+import { Download, ArrowRight, Server, Play, Sparkles } from 'lucide-react';
 import { personalInfo, typingTexts } from '../data/portfolioData';
 import { useArchitecture } from '../context/ArchitectureContext';
 import { TelemetryButton } from './TelemetryButton';
 
 export const Hero = () => {
-  const { triggerTelemetry, isDevToolsActive } = useArchitecture();
+  const { triggerTelemetry } = useArchitecture();
   const [textIndex, setTextIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -86,7 +86,7 @@ export const Hero = () => {
   };
 
   return (
-    <section id="home" className="relative pt-6 pb-14 md:pt-12 md:pb-20 my-8 sm:my-14 overflow-hidden">
+    <section id="home" className="relative pt-8 pb-16 md:pt-14 md:pb-24 my-10 sm:my-16 overflow-hidden">
       
       {/* Background Microservice Grid Glows */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-cyan-500/10 rounded-full blur-[160px] pointer-events-none"></div>
@@ -100,7 +100,7 @@ export const Hero = () => {
             {/* Architectural Status Tag */}
             <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-slate-900/90 border border-cyan-500/40 text-cyan-300 text-xs font-mono shadow-md max-w-full">
               <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping flex-shrink-0"></span>
-              <span className="truncate">Available for Backend Engineering & Systems Architecture Roles</span>
+              <span className="truncate">Available for Backend Engineering Roles</span>
             </div>
 
             {/* Main Headline */}
@@ -124,45 +124,42 @@ export const Hero = () => {
               {personalInfo.tagline}
             </p>
 
-            {/* Action Buttons Responsive Grid */}
-            <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-4 pt-2">
+            {/* Action Buttons: Clean Single-Line Alignment on Desktop */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
               
               <TelemetryButton
                 traceData={heroTraceData}
-                label="Simulate Backend API Call"
+                label="Simulate API Call"
                 icon={Play}
-                className="w-full sm:w-auto justify-center text-xs py-3"
               />
 
-              <a href="#contact" className="btn-secondary w-full sm:w-auto justify-center text-xs py-3">
+              <a href="#contact" className="btn-secondary">
                 <span>Contact Me</span>
                 <ArrowRight className="w-4 h-4" />
               </a>
 
-              <a
-                href="#about"
-                className="btn-secondary w-full sm:w-auto justify-center text-xs py-3"
-              >
+              <a href="#about" className="btn-secondary">
                 <Download className="w-4 h-4" />
-                <span>View Full Resume Data</span>
+                <span>View Resume</span>
               </a>
+
             </div>
 
             {/* Technical Key Badges Grid */}
             <div className="pt-6 border-t border-slate-800/80 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 text-xs font-mono">
-              <div className="p-4 rounded-2xl bg-[#0c1424] border border-slate-800 shadow-md my-1">
+              <div className="p-4 rounded-2xl bg-[#0c1424] border border-slate-800 shadow-md">
                 <span className="text-cyan-400 font-bold text-xl sm:text-2xl block">{personalInfo.experienceYears}</span>
-                <span className="text-slate-400 mt-1 block">Years Industry Exp</span>
+                <span className="text-slate-400 mt-1 block">Years Exp</span>
               </div>
-              <div className="p-4 rounded-2xl bg-[#0c1424] border border-slate-800 shadow-md my-1">
+              <div className="p-4 rounded-2xl bg-[#0c1424] border border-slate-800 shadow-md">
                 <span className="text-emerald-400 font-bold text-xl sm:text-2xl block">100M+</span>
                 <span className="text-slate-400 mt-1 block">Records Scaled</span>
               </div>
-              <div className="p-4 rounded-2xl bg-[#0c1424] border border-slate-800 shadow-md my-1">
+              <div className="p-4 rounded-2xl bg-[#0c1424] border border-slate-800 shadow-md">
                 <span className="text-amber-400 font-bold text-xl sm:text-2xl block">Spring Boot</span>
                 <span className="text-slate-400 mt-1 block">Microservices</span>
               </div>
-              <div className="p-4 rounded-2xl bg-[#0c1424] border border-slate-800 shadow-md my-1">
+              <div className="p-4 rounded-2xl bg-[#0c1424] border border-slate-800 shadow-md">
                 <span className="text-indigo-400 font-bold text-xl sm:text-2xl block">FHIR / ZATCA</span>
                 <span className="text-slate-400 mt-1 block">Healthcare APIs</span>
               </div>
@@ -170,7 +167,7 @@ export const Hero = () => {
 
           </div>
 
-          {/* Right Column: Interactive Portrait */}
+          {/* Right Column: Interactive Portrait Container */}
           <div className="lg:col-span-5 flex justify-center">
             <div className="relative w-full max-w-lg">
               
@@ -178,7 +175,7 @@ export const Hero = () => {
 
               <div
                 onClick={handlePhotoClick}
-                className="relative glass-card p-6 sm:p-7 rounded-[36px] space-y-5 border-2 border-cyan-500/40 shadow-[0_0_50px_rgba(6,182,212,0.35)] cursor-pointer group hover:scale-[1.01] transition-transform duration-300 my-2"
+                className="relative glass-card p-6 sm:p-7 rounded-[36px] space-y-5 border-2 border-cyan-500/40 shadow-[0_0_50px_rgba(6,182,212,0.35)] cursor-pointer group hover:scale-[1.01] transition-transform duration-300"
                 title="Click portrait to ping backend status!"
               >
                 
