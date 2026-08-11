@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Terminal, Download, ArrowRight, Server, Play, Sparkles, Activity, CheckCircle } from 'lucide-react';
+import { Terminal, Download, ArrowRight, Server, Play, Sparkles } from 'lucide-react';
 import { personalInfo, typingTexts } from '../data/portfolioData';
 import { useArchitecture } from '../context/ArchitectureContext';
 import { TelemetryButton } from './TelemetryButton';
@@ -86,7 +86,7 @@ export const Hero = () => {
   };
 
   return (
-    <section id="home" className="relative pt-6 pb-14 md:pt-12 md:pb-20 overflow-hidden">
+    <section id="home" className="relative pt-6 pb-14 md:pt-12 md:pb-20 my-8 sm:my-14 overflow-hidden">
       
       {/* Background Microservice Grid Glows */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-cyan-500/10 rounded-full blur-[160px] pointer-events-none"></div>
@@ -131,17 +131,17 @@ export const Hero = () => {
                 traceData={heroTraceData}
                 label="Simulate Backend API Call"
                 icon={Play}
-                className="w-full sm:w-auto justify-center text-sm py-3.5 px-7"
+                className="w-full sm:w-auto justify-center text-xs py-3"
               />
 
-              <a href="#contact" className="btn-secondary w-full sm:w-auto justify-center text-sm py-3.5 px-7">
+              <a href="#contact" className="btn-secondary w-full sm:w-auto justify-center text-xs py-3">
                 <span>Contact Me</span>
                 <ArrowRight className="w-4 h-4" />
               </a>
 
               <a
                 href="#about"
-                className="inline-flex items-center justify-center gap-2 text-slate-300 hover:text-cyan-400 font-mono text-xs px-5 py-3.5 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/40 transition-colors w-full sm:w-auto"
+                className="btn-secondary w-full sm:w-auto justify-center text-xs py-3"
               >
                 <Download className="w-4 h-4" />
                 <span>View Full Resume Data</span>
@@ -150,19 +150,19 @@ export const Hero = () => {
 
             {/* Technical Key Badges Grid */}
             <div className="pt-6 border-t border-slate-800/80 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 text-xs font-mono">
-              <div className="p-4 rounded-2xl bg-[#0c1424] border border-slate-800 shadow-md">
+              <div className="p-4 rounded-2xl bg-[#0c1424] border border-slate-800 shadow-md my-1">
                 <span className="text-cyan-400 font-bold text-xl sm:text-2xl block">{personalInfo.experienceYears}</span>
                 <span className="text-slate-400 mt-1 block">Years Industry Exp</span>
               </div>
-              <div className="p-4 rounded-2xl bg-[#0c1424] border border-slate-800 shadow-md">
+              <div className="p-4 rounded-2xl bg-[#0c1424] border border-slate-800 shadow-md my-1">
                 <span className="text-emerald-400 font-bold text-xl sm:text-2xl block">100M+</span>
                 <span className="text-slate-400 mt-1 block">Records Scaled</span>
               </div>
-              <div className="p-4 rounded-2xl bg-[#0c1424] border border-slate-800 shadow-md">
+              <div className="p-4 rounded-2xl bg-[#0c1424] border border-slate-800 shadow-md my-1">
                 <span className="text-amber-400 font-bold text-xl sm:text-2xl block">Spring Boot</span>
                 <span className="text-slate-400 mt-1 block">Microservices</span>
               </div>
-              <div className="p-4 rounded-2xl bg-[#0c1424] border border-slate-800 shadow-md">
+              <div className="p-4 rounded-2xl bg-[#0c1424] border border-slate-800 shadow-md my-1">
                 <span className="text-indigo-400 font-bold text-xl sm:text-2xl block">FHIR / ZATCA</span>
                 <span className="text-slate-400 mt-1 block">Healthcare APIs</span>
               </div>
@@ -170,20 +170,18 @@ export const Hero = () => {
 
           </div>
 
-          {/* Right Column: Interactive & Attractive Portrait Container */}
+          {/* Right Column: Interactive Portrait */}
           <div className="lg:col-span-5 flex justify-center">
             <div className="relative w-full max-w-lg">
               
-              {/* Multi-layer Vibrant Ambient Glow */}
               <div className="absolute -inset-2 bg-gradient-to-r from-cyan-500 via-indigo-500 to-amber-500 rounded-[38px] blur-2xl opacity-60 group-hover:opacity-100 transition duration-1000"></div>
 
               <div
                 onClick={handlePhotoClick}
-                className="relative glass-card p-6 sm:p-7 rounded-[36px] space-y-5 border-2 border-cyan-500/40 shadow-[0_0_50px_rgba(6,182,212,0.35)] cursor-pointer group hover:scale-[1.01] transition-transform duration-300"
+                className="relative glass-card p-6 sm:p-7 rounded-[36px] space-y-5 border-2 border-cyan-500/40 shadow-[0_0_50px_rgba(6,182,212,0.35)] cursor-pointer group hover:scale-[1.01] transition-transform duration-300 my-2"
                 title="Click portrait to ping backend status!"
               >
                 
-                {/* User Portrait Image Box */}
                 <div className="relative overflow-hidden rounded-3xl bg-slate-950 border-2 border-cyan-500/50 h-[380px] sm:h-[480px] w-full shadow-2xl flex items-center justify-center">
                   
                   <img
@@ -192,7 +190,6 @@ export const Hero = () => {
                     className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 filter contrast-105"
                   />
 
-                  {/* Interactive Status Ping Overlay */}
                   {photoPinged && (
                     <div className="absolute top-4 right-4 bg-emerald-950/90 border border-emerald-500/60 text-emerald-300 text-xs font-mono px-3 py-1.5 rounded-xl shadow-2xl animate-bounce flex items-center gap-1.5">
                       <Sparkles className="w-4 h-4 text-emerald-400" />
@@ -200,7 +197,6 @@ export const Hero = () => {
                     </div>
                   )}
 
-                  {/* Floating Microservice Live Router Tag */}
                   <div className="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-slate-950/90 backdrop-blur-md border border-cyan-500/30 text-xs font-mono flex items-center justify-between text-slate-300 shadow-2xl">
                     <div className="flex items-center gap-2.5">
                       <Server className="w-4 h-4 text-cyan-400 flex-shrink-0" />
@@ -214,7 +210,6 @@ export const Hero = () => {
 
                 </div>
 
-                {/* Microservice Endpoints Router Card */}
                 <div className="p-4 sm:p-5 rounded-2xl bg-slate-950/95 border border-slate-800 text-xs font-mono space-y-2.5 shadow-inner">
                   <div className="flex items-center justify-between text-slate-400">
                     <span className="text-slate-500 font-semibold">LIVE SYSTEM ROUTER</span>
