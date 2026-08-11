@@ -1,11 +1,11 @@
 import React from 'react';
-import { FolderGit2, ExternalLink, Play, Server, ShieldCheck, Database, Cpu, Layers } from 'lucide-react';
+import { FolderGit2, ExternalLink, Play, Server, ShieldCheck, Database, Cpu, Layers, Terminal } from 'lucide-react';
 import { GithubIcon } from './SocialIcons';
 import { projectsData } from '../data/portfolioData';
 import { useArchitecture } from '../context/ArchitectureContext';
 
 export const Projects = () => {
-  const { triggerTelemetry } = useArchitecture();
+  const { triggerTelemetry, isDevToolsActive } = useArchitecture();
 
   const handleSimulateProjectRequest = (project) => {
     triggerTelemetry({
@@ -27,11 +27,15 @@ export const Projects = () => {
   };
 
   return (
-    <section id="projects" className="py-24 sm:py-32 relative">
-      <div className="container-custom">
+    <section id="projects" className="py-28 sm:py-36 bg-[#060911] border-t border-b border-slate-800/80 relative my-16">
+      
+      {/* Decorative Glow Ambient Halo */}
+      <div className="absolute top-1/3 left-10 w-[550px] h-[550px] bg-cyan-500/5 rounded-full blur-[160px] pointer-events-none"></div>
+
+      <div className="container-custom relative z-10">
         
-        {/* Section Title */}
-        <div className="flex flex-col items-center text-center mb-20 space-y-4">
+        {/* Section Title with Generous Bottom Margin to Prevent Line Touching */}
+        <div className="flex flex-col items-center text-center mb-20 sm:mb-24 space-y-4">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-950/80 border border-cyan-500/40 text-cyan-400 text-xs font-mono shadow-md">
             <Layers className="w-4 h-4" />
             <span>ENTERPRISE MICROSERVICES PORTFOLIO</span>
@@ -44,18 +48,18 @@ export const Projects = () => {
           </p>
         </div>
 
-        {/* Projects Cards Grid with Generous Spacing and Distinct Boxes */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12 items-stretch">
+        {/* Projects Cards Grid with Generous Spacing and Luxury Card Padding */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-14 items-stretch">
           {projectsData.map((proj) => (
             <div
               key={proj.id}
-              className="glass-card flex flex-col justify-between p-8 space-y-6 border border-slate-700/80 hover:border-cyan-500/60 transition-all group h-full shadow-2xl"
+              className="glass-card flex flex-col justify-between p-8 sm:p-10 space-y-8 border border-slate-700/80 hover:border-cyan-500/60 transition-all group h-full shadow-2xl"
             >
-              <div className="space-y-5">
+              <div className="space-y-6">
                 
                 {/* Header Badge */}
-                <div className="flex justify-between items-center border-b border-slate-800/80 pb-4">
-                  <span className="px-3 py-1 rounded font-mono text-[11px] font-bold bg-cyan-950/90 text-cyan-300 border border-cyan-500/40">
+                <div className="flex justify-between items-center border-b border-slate-800/80 pb-5">
+                  <span className="px-3.5 py-1.5 rounded-lg font-mono text-xs font-bold bg-cyan-950/90 text-cyan-300 border border-cyan-500/40">
                     {proj.badge}
                   </span>
                   <div className="flex items-center gap-2 text-slate-400">
@@ -63,7 +67,7 @@ export const Projects = () => {
                       href={proj.github}
                       target="_blank"
                       rel="noreferrer"
-                      className="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-500/50 hover:text-white transition-colors"
+                      className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-500/50 hover:text-white transition-colors"
                       title="View GitHub Repository"
                     >
                       <GithubIcon className="w-4 h-4" />
@@ -72,26 +76,26 @@ export const Projects = () => {
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors leading-snug">
+                  <h3 className="text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors leading-snug">
                     {proj.title}
                   </h3>
-                  <p className="text-xs font-mono text-cyan-400/90 mt-1">
+                  <p className="text-xs font-mono text-cyan-400 mt-1.5">
                     {proj.subtitle}
                   </p>
                 </div>
 
-                <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                <p className="text-slate-300 text-sm leading-relaxed font-normal">
                   {proj.description}
                 </p>
 
-                {/* Architecture Key Features Panel */}
-                <div className="p-4.5 rounded-2xl bg-slate-950/90 border border-slate-800 text-xs font-mono space-y-3 shadow-inner">
-                  <span className="text-cyan-400 font-bold block text-[11px] uppercase tracking-wider">
+                {/* Architecture Key Features Panel with Generous Inner Padding */}
+                <div className="p-5 sm:p-6 rounded-2xl bg-slate-950/90 border border-slate-800 text-xs font-mono space-y-3 shadow-inner">
+                  <span className="text-cyan-400 font-bold block text-xs uppercase tracking-wider">
                     ⚡ Backend Architectural Specs
                   </span>
-                  <div className="space-y-2 text-slate-300 text-[11px]">
+                  <div className="space-y-2 text-slate-300 text-xs">
                     {Object.entries(proj.architecture).map(([key, val], aIdx) => (
-                      <div key={aIdx} className="flex justify-between items-center border-b border-slate-900/90 pb-1.5">
+                      <div key={aIdx} className="flex justify-between items-center border-b border-slate-900 pb-2">
                         <span className="text-slate-400 capitalize">{key}:</span>
                         <span className="text-cyan-300 font-semibold text-right pl-2">{val}</span>
                       </div>
@@ -100,7 +104,7 @@ export const Projects = () => {
                 </div>
 
                 {/* Technical Bullet Highlights */}
-                <ul className="space-y-2 text-xs text-slate-300 list-disc list-inside">
+                <ul className="space-y-2.5 text-xs text-slate-300 list-disc list-inside">
                   {proj.points.slice(0, 3).map((pt, ptIdx) => (
                     <li key={ptIdx} className="leading-relaxed">
                       {pt}
@@ -110,14 +114,22 @@ export const Projects = () => {
 
               </div>
 
-              {/* Bottom Action: Test Microservice Endpoint */}
-              <div className="pt-5 border-t border-slate-800 flex items-center justify-between">
+              {/* Bottom Action Row */}
+              <div className="pt-6 border-t border-slate-800 flex items-center justify-between">
                 <button
                   onClick={() => handleSimulateProjectRequest(proj)}
-                  className="btn-primary text-xs w-full justify-center py-3"
+                  className={`w-full justify-center text-xs py-3.5 rounded-xl font-mono transition-all flex items-center gap-2 border ${
+                    isDevToolsActive
+                      ? 'btn-primary'
+                      : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-cyan-300 hover:border-slate-700'
+                  }`}
                 >
-                  <Play className="w-3.5 h-3.5 fill-white" />
-                  <span>Simulate {proj.telemetryPayload.endpoint}</span>
+                  <Terminal className="w-4 h-4 text-cyan-400" />
+                  <span>
+                    {isDevToolsActive 
+                      ? `Simulate ${proj.telemetryPayload.endpoint}`
+                      : `API Endpoint: ${proj.telemetryPayload.endpoint}`}
+                  </span>
                 </button>
               </div>
 
