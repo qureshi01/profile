@@ -63,7 +63,7 @@ export const Projects = () => {
                   {proj.description}
                 </p>
 
-                {/* Architecture Key Features Panel - Identical sub-item token to About */}
+                {/* Architecture Key Features Panel - Identical sub-item token to About & Skills */}
                 <div className="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 text-xs font-mono space-y-2">
                   <span className="text-slate-500 block text-[10px] uppercase font-bold tracking-wider">
                     ⚡ Backend Architectural Specs
