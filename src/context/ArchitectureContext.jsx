@@ -5,6 +5,8 @@ const ArchitectureContext = createContext();
 export const ArchitectureProvider = ({ children }) => {
   const [isTelemetryOpen, setIsTelemetryOpen] = useState(false);
   const [isDevToolsActive, setIsDevToolsActive] = useState(true);
+  const [showTelemetryInfo, setShowTelemetryInfo] = useState(false);
+  
   const [currentTrace, setCurrentTrace] = useState({
     title: "System Telemetry Ready",
     endpoint: "GET /api/v1/system/health",
@@ -41,15 +43,22 @@ export const ArchitectureProvider = ({ children }) => {
     setIsDevToolsActive(prev => !prev);
   };
 
+  const toggleTelemetryInfo = () => {
+    setShowTelemetryInfo(prev => !prev);
+  };
+
   return (
     <ArchitectureContext.Provider
       value={{
         isTelemetryOpen,
         isDevToolsActive,
+        showTelemetryInfo,
         currentTrace,
         triggerTelemetry,
         closeTelemetry,
         toggleDevTools,
+        toggleTelemetryInfo,
+        setShowTelemetryInfo,
         setIsTelemetryOpen
       }}
     >
