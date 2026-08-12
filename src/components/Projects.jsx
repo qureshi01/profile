@@ -1,106 +1,97 @@
 import React from 'react';
-import { Layers, Play } from 'lucide-react';
+import { Layers } from 'lucide-react';
 import { GithubIcon } from './SocialIcons';
 import { projectsData } from '../data/portfolioData';
 import { TelemetryButton } from './TelemetryButton';
 
 export const Projects = () => {
   return (
-    <section id="projects" className="section-sep py-24 sm:py-32">
-      <div className="container-custom">
-
-        {/* Section heading */}
-        <div className="section-title">
-          <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-[var(--bg-elevated)] border border-[var(--border-default)] text-[var(--cyan)] text-[11px] font-mono mb-6">
-            <Layers className="w-3.5 h-3.5" /> ENTERPRISE MICROSERVICES PORTFOLIO
-          </span>
-          <h2>Featured <span className="gradient-text">Backend Projects</span></h2>
-          <p>Microservices architectures, RESTful API ecosystems, and healthcare transaction platforms engineered for high reliability.</p>
+    <section id="projects" className="section relative">
+      <div className="container-custom relative z-10">
+        <div className="section-header">
+          <span className="section-badge"><Layers className="w-3.5 h-3.5" /> Projects</span>
+          <h2 className="section-title">Featured <span className="gradient-text">Backend Projects</span></h2>
+          <p className="section-desc">
+            Microservices architectures, RESTful API ecosystems, and healthcare transaction platforms built for reliability.
+          </p>
         </div>
 
-        {/* Projects grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8">
           {projectsData.map((proj) => (
-            <div key={proj.id} className="card flex flex-col justify-between space-y-6 group h-full">
+            <article
+              key={proj.id}
+              className="glass-card card-pad flex flex-col stack-lg h-full"
+            >
+              <div className="flex justify-between items-center card-divider">
+                <span className="chip chip-cyan text-[11px]">{proj.badge}</span>
+                <a
+                  href={proj.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-icon w-10 h-10"
+                  title="View on GitHub"
+                >
+                  <GithubIcon className="w-4 h-4" />
+                </a>
+              </div>
 
-              {/* Top content */}
-              <div className="space-y-4">
-
-                {/* Badge + GitHub row */}
-                <div className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-4">
-                  <span className="tag tag-cyan">{proj.badge}</span>
-                  <a href={proj.github} target="_blank" rel="noreferrer"
-                    className="w-8 h-8 rounded-md bg-[var(--bg-surface)] border border-[var(--border-default)] flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--cyan)] hover:border-[var(--border-accent)] transition-all"
-                    title="View GitHub Repo">
-                    <GithubIcon className="w-4 h-4" />
-                  </a>
-                </div>
-
-                {/* Title */}
+              <div className="stack-md flex-grow">
                 <div>
-                  <h3 className="font-bold text-[var(--text-primary)] text-lg group-hover:text-[var(--cyan-lt)] transition-colors leading-snug">
-                    {proj.title}
-                  </h3>
-                  <p className="text-[11px] font-mono text-[var(--text-muted)] mt-1">{proj.subtitle}</p>
+                  <h3 className="text-xl font-bold text-white leading-snug">{proj.title}</h3>
+                  <p className="text-xs font-mono text-sky-400 mt-3 leading-relaxed">{proj.subtitle}</p>
                 </div>
 
-                {/* Description */}
-                <p className="text-[var(--text-secondary)] text-xs leading-relaxed">
-                  {proj.description}
-                </p>
+                <p className="text-slate-400 text-sm leading-[1.75]">{proj.description}</p>
 
-                {/* Architecture specs */}
-                <div className="inner-box space-y-2">
-                  <p className="text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-wider font-bold">⚡ Architecture Specs</p>
-                  <div className="space-y-1.5">
+                <div className="card-inner stack-sm font-mono text-xs">
+                  <span className="text-sky-400 font-semibold block uppercase tracking-wide text-[10px]">
+                    Architecture
+                  </span>
+                  <div className="space-y-2 text-slate-400">
                     {Object.entries(proj.architecture).map(([key, val], aIdx) => (
-                      <div key={aIdx} className="flex justify-between items-center text-[11px] font-mono">
-                        <span className="text-[var(--text-muted)] capitalize">{key}:</span>
-                        <span className="text-[var(--cyan)] font-semibold truncate ml-2">{val}</span>
+                      <div key={aIdx} className="flex justify-between items-start gap-3 border-b border-white/5 pb-2 last:border-0 last:pb-0">
+                        <span className="capitalize text-slate-500 flex-shrink-0">{key}</span>
+                        <span className="text-sky-300/90 text-right leading-snug">{val}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Bullet points */}
-                <ul className="space-y-1.5">
+                <ul className="stack-sm text-sm text-slate-400">
                   {proj.points.slice(0, 3).map((pt, ptIdx) => (
-                    <li key={ptIdx} className="flex items-start gap-2 text-xs text-[var(--text-secondary)] leading-relaxed">
-                      <span className="text-[var(--cyan)] mt-0.5 flex-shrink-0">›</span>
+                    <li key={ptIdx} className="flex items-start gap-3 leading-[1.75]">
+                      <span className="text-sky-500 mt-1.5 w-1 h-1 rounded-full bg-sky-500 flex-shrink-0" />
                       {pt}
                     </li>
                   ))}
                 </ul>
-
               </div>
 
-              {/* Bottom action */}
-              <div className="pt-4 border-t border-[var(--border-subtle)]">
+              <div className="pt-6 border-t border-white/8 mt-auto">
                 <TelemetryButton
                   traceData={{
-                    title: `Project Simulator: ${proj.title}`,
+                    title: `Project Endpoint Simulator: ${proj.title}`,
                     endpoint: proj.telemetryPayload.endpoint,
                     status: proj.telemetryPayload.status,
                     latency: proj.telemetryPayload.latency,
                     traceId: proj.telemetryPayload.traceId,
                     steps: proj.telemetryPayload.steps,
                     payload: {
-                      projectId: proj.id, title: proj.title,
+                      projectId: proj.id,
+                      title: proj.title,
                       architectureSpecs: proj.architecture,
                       activeEndpoints: [proj.telemetryPayload.endpoint],
-                      securityModel: "JWT Bearer + Spring Security",
+                      securityModel: "JWT Bearer + Spring Security Filter Chain",
+                      dbPattern: proj.architecture.pattern || "Isolated PostgreSQL Instance"
                     }
                   }}
-                  label={`Run ${proj.telemetryPayload.endpoint.replace('POST ', '')}`}
-                  icon={Play}
-                  className="w-full justify-center"
+                  label="Simulate endpoint"
+                  className="w-full text-xs sm:text-sm"
                 />
               </div>
-
-            </div>
+            </article>
           ))}
         </div>
-
       </div>
     </section>
   );

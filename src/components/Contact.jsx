@@ -1,151 +1,194 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, MessageSquare, CheckCircle2 } from 'lucide-react';
-import { GithubIcon, LinkedinIcon } from './SocialIcons';
+import { Mail, Phone, MapPin, Send, CheckCircle2, MessageSquare } from 'lucide-react';
+import { LinkedinIcon } from './SocialIcons';
 import { personalInfo } from '../data/portfolioData';
 import { useArchitecture } from '../context/ArchitectureContext';
 
 export const Contact = () => {
   const { triggerTelemetry } = useArchitecture();
-  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
+  const [formData, setFormData] = useState({
+    senderName: '',
+    senderEmail: '',
+    subject: 'Backend Engineering Opportunity',
+    message: ''
+  });
   const [submitted, setSubmitted] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
+
     triggerTelemetry({
-      title: "Contact Form API Request",
+      title: "Contact Form REST API Dispatch",
       endpoint: "POST /api/v1/contact/send-message",
-      status: 200, latency: "24ms", traceId: "tr-contact-post-9090",
+      status: 201,
+      latency: "32ms",
+      traceId: `tr-contact-${Date.now()}`,
       steps: [
-        "1. POST /api/v1/contact/send-message invoked",
-        "2. Input payload validation passed",
-        "3. Spring Mail SMTP triggered background thread",
-        "4. Message persisted to MongoDB messages collection",
-        "5. HTTP 200 OK dispatched"
+        "1. REST API endpoint POST /api/v1/contact/send-message invoked",
+        "2. Input validation: Email format & XSS protection check passed",
+        "3. Rate Limiting: IpAddress token bucket OK (1/10 consumed)",
+        "4. Asynchronous Kafka Event published to 'contact-notifications' topic",
+        "5. Spring Mail Async Worker picked message for dispatch",
+        "6. Returned HTTP 201 CREATED status payload"
       ],
       payload: {
-        senderName: formData.name || "Recruiter",
-        senderEmail: formData.email || "recruiter@company.com",
-        subject: formData.subject || "Backend Engineer Role",
-        message: formData.message,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        sender: formData.senderName || "Recruiter / Hiring Manager",
+        email: formData.senderEmail || "hiring@company.com",
+        subject: formData.subject,
+        body: formData.message,
+        recipient: personalInfo.email,
+        status: "DISPATCHED_TO_KAFKA_QUEUE"
       }
     });
-    setTimeout(() => setSubmitted(false), 5000);
+
+    setTimeout(() => {
+      setSubmitted(false);
+      setFormData({ senderName: '', senderEmail: '', subject: 'Backend Engineering Opportunity', message: '' });
+    }, 4000);
   };
 
-  const contactItems = [
-    { icon: Mail,   color: 'text-[var(--cyan)]', label: 'Email',    val: personalInfo.email,    href: `mailto:${personalInfo.email}` },
-    { icon: Phone,  color: 'text-emerald-400',    label: 'Phone',    val: personalInfo.phone,    href: `tel:${personalInfo.phone}` },
-    { icon: MapPin, color: 'text-amber-400',       label: 'Location', val: personalInfo.location },
+  const channels = [
+    { icon: Mail, label: 'Email', value: personalInfo.email, href: `mailto:${personalInfo.email}`, accent: 'sky' },
+    { icon: Phone, label: 'Phone', value: personalInfo.phone, href: `tel:${personalInfo.phone}`, accent: 'emerald' },
+    { icon: LinkedinIcon, label: 'LinkedIn', value: 'linkedin.com/in/hashimqureshic', href: personalInfo.linkedin, accent: 'indigo' },
+    { icon: MapPin, label: 'Location', value: personalInfo.location, accent: 'amber' },
   ];
 
-  return (
-    <section id="contact" className="section-sep py-24 sm:py-32">
-      <div className="container-custom">
+  const accentMap = {
+    sky: 'bg-sky-500/10 border-sky-500/20 text-sky-400',
+    emerald: 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400',
+    indigo: 'bg-indigo-500/10 border-indigo-500/20 text-indigo-400',
+    amber: 'bg-amber-500/10 border-amber-500/20 text-amber-400',
+  };
 
-        {/* Section heading */}
-        <div className="section-title">
-          <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-[var(--bg-elevated)] border border-[var(--border-default)] text-[var(--cyan)] text-[11px] font-mono mb-6">
-            <MessageSquare className="w-3.5 h-3.5" /> CONTACT & INQUIRIES
-          </span>
-          <h2>Get In <span className="gradient-text">Touch</span></h2>
-          <p>Available for full-time Backend Engineering, Spring Boot Microservices, and remote opportunities.</p>
+  return (
+    <section id="contact" className="section relative">
+      <div className="container-custom">
+        <div className="section-header">
+          <span className="section-badge"><MessageSquare className="w-3.5 h-3.5" /> Contact</span>
+          <h2 className="section-title">Get In <span className="gradient-text">Touch</span></h2>
+          <p className="section-desc">
+            Have a project, job opportunity, or architecture discussion? Send a message directly.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
+          <div className="lg:col-span-5">
+            <div className="glass-card card-pad stack-md h-full">
+              <h3 className="text-lg font-bold text-white card-divider">Contact Channels</h3>
+              <div className="stack-sm">
+                {channels.map(({ icon: Icon, label, value, href, accent }) => {
+                  const inner = (
+                    <>
+                      <div className={`w-12 h-12 rounded-xl border flex items-center justify-center flex-shrink-0 ${accentMap[accent]}`}>
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <div className="min-w-0 py-0.5">
+                        <span className="text-xs text-slate-500 block mb-1">{label}</span>
+                        <span className="text-sm text-white font-medium break-all leading-relaxed">{value}</span>
+                      </div>
+                    </>
+                  );
 
-          {/* ── Left — contact info ── */}
-          <div className="lg:col-span-5 space-y-4">
-            <div className="card space-y-5">
-              <h3 className="font-bold text-[var(--text-primary)] border-b border-[var(--border-subtle)] pb-3 text-sm font-mono uppercase tracking-wider">
-                Direct Contact
-              </h3>
+                  return href ? (
+                    <a key={label} href={href} target={label === 'LinkedIn' ? '_blank' : undefined} rel="noreferrer" className="card-inner flex items-center gap-5 hover:border-sky-500/25 transition-colors">
+                      {inner}
+                    </a>
+                  ) : (
+                    <div key={label} className="card-inner flex items-center gap-5">{inner}</div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
 
-              <div className="space-y-4">
-                {contactItems.map((item, i) => (
-                  <div key={i} className="inner-box flex items-center gap-3">
-                    <item.icon className={`w-4 h-4 flex-shrink-0 ${item.color}`} />
-                    <div className="min-w-0">
-                      <p className="text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-wider">{item.label}</p>
-                      {item.href ? (
-                        <a href={item.href} className={`${item.color} font-semibold text-sm hover:underline truncate block`}>
-                          {item.val}
-                        </a>
-                      ) : (
-                        <p className="text-[var(--text-primary)] font-semibold text-sm">{item.val}</p>
-                      )}
+          <div className="lg:col-span-7">
+            <div className="glass-card card-pad stack-lg">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 card-divider">
+                <div>
+                  <h3 className="text-lg font-bold text-white">Send a Message</h3>
+                  <p className="text-xs font-mono text-sky-400 mt-1.5">POST /api/v1/contact/send-message</p>
+                </div>
+                <span className="chip chip-emerald text-[10px] w-fit">201 CREATED</span>
+              </div>
+
+              {submitted ? (
+                <div className="card-inner p-10 text-center stack-md animate-fade-in border-emerald-500/25">
+                  <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto" />
+                  <h4 className="font-bold text-lg text-white">Message Sent!</h4>
+                  <p className="text-sm text-slate-400 leading-relaxed">
+                    Thank you — your message has been queued and will reach Hashim shortly.
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="stack-md">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div>
+                      <label className="block text-xs font-medium text-slate-500 mb-2">Name *</label>
+                      <input
+                        type="text"
+                        name="senderName"
+                        required
+                        value={formData.senderName}
+                        onChange={handleChange}
+                        placeholder="Your name"
+                        className="input-field"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-slate-500 mb-2">Email *</label>
+                      <input
+                        type="email"
+                        name="senderEmail"
+                        required
+                        value={formData.senderEmail}
+                        onChange={handleChange}
+                        placeholder="you@company.com"
+                        className="input-field"
+                      />
                     </div>
                   </div>
-                ))}
-              </div>
 
-              {/* Social links */}
-              <div className="pt-4 border-t border-[var(--border-subtle)] flex gap-3">
-                <a href={personalInfo.linkedin} target="_blank" rel="noreferrer"
-                  className="btn btn-secondary flex-1 justify-center text-xs">
-                  <LinkedinIcon className="w-4 h-4 text-indigo-400" /> LinkedIn
-                </a>
-                <a href={personalInfo.github} target="_blank" rel="noreferrer"
-                  className="btn btn-secondary flex-1 justify-center text-xs">
-                  <GithubIcon className="w-4 h-4 text-[var(--cyan)]" /> GitHub
-                </a>
-              </div>
-            </div>
-          </div>
+                  <div>
+                    <label className="block text-xs font-medium text-slate-500 mb-1.5">Subject *</label>
+                    <input
+                      type="text"
+                      name="subject"
+                      required
+                      value={formData.subject}
+                      onChange={handleChange}
+                      placeholder="Role or project title"
+                      className="input-field"
+                    />
+                  </div>
 
-          {/* ── Right — message form ── */}
-          <div className="lg:col-span-7">
-            <div className="card space-y-5">
-              <div className="border-b border-[var(--border-subtle)] pb-4">
-                <h3 className="font-bold text-[var(--text-primary)] text-sm font-mono uppercase tracking-wider">Send a Message</h3>
-                <p className="text-[11px] text-[var(--text-muted)] mt-1">For role opportunities or technical collaboration.</p>
-              </div>
+                  <div>
+                    <label className="block text-xs font-medium text-slate-500 mb-1.5">Message *</label>
+                    <textarea
+                      name="message"
+                      required
+                      rows={5}
+                      value={formData.message}
+                      onChange={handleChange}
+                      placeholder="Write your message here..."
+                      className="input-field resize-y min-h-[120px]"
+                    />
+                  </div>
 
-              {submitted && (
-                <div className="inner-box flex items-center gap-3 border-emerald-500/40 animate-fade-in">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                  <span className="text-emerald-400 text-xs font-mono">Message dispatched! Telemetry trace captured.</span>
-                </div>
+                  <button type="submit" className="btn-primary w-full">
+                    <Send className="w-4 h-4" />
+                    Send Message
+                  </button>
+                </form>
               )}
-
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div className="space-y-1.5">
-                    <label className="text-[11px] font-mono text-[var(--text-muted)] uppercase tracking-wider">Name *</label>
-                    <input type="text" required placeholder="John Doe"
-                      value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })}
-                      className="form-input" />
-                  </div>
-                  <div className="space-y-1.5">
-                    <label className="text-[11px] font-mono text-[var(--text-muted)] uppercase tracking-wider">Email *</label>
-                    <input type="email" required placeholder="john@company.com"
-                      value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })}
-                      className="form-input" />
-                  </div>
-                </div>
-
-                <div className="space-y-1.5">
-                  <label className="text-[11px] font-mono text-[var(--text-muted)] uppercase tracking-wider">Subject</label>
-                  <input type="text" placeholder="Role Opportunity / Discussion"
-                    value={formData.subject} onChange={e => setFormData({ ...formData, subject: e.target.value })}
-                    className="form-input" />
-                </div>
-
-                <div className="space-y-1.5">
-                  <label className="text-[11px] font-mono text-[var(--text-muted)] uppercase tracking-wider">Message *</label>
-                  <textarea required rows="5" placeholder="Write your message here..."
-                    value={formData.message} onChange={e => setFormData({ ...formData, message: e.target.value })}
-                    className="form-input resize-none" />
-                </div>
-
-                <button type="submit" className="btn btn-primary w-full justify-center">
-                  <Send className="w-4 h-4" /> Send Message
-                </button>
-              </form>
             </div>
           </div>
-
         </div>
       </div>
     </section>
