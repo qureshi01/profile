@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Download, ArrowRight, Server, Play } from 'lucide-react';
 import { personalInfo, typingTexts } from '../data/portfolioData';
 import { TelemetryButton } from './TelemetryButton';
+import profilePhoto from '../assets/profile.jpg';
 
 export const Hero = () => {
   const [textIndex, setTextIndex] = useState(0);
@@ -56,7 +57,7 @@ export const Hero = () => {
   };
 
   return (
-    <section id="home" className="section pt-24 md:pt-28 pb-12 md:pb-16 relative overflow-hidden">
+    <section id="home" className="section pt-20 md:pt-24 pb-12 md:pb-16 relative overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[min(600px,100vw)] h-[400px] bg-sky-500/8 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="container-custom relative z-10">
@@ -126,7 +127,7 @@ export const Hero = () => {
               <div className="relative glass-card card-pad stack-md">
                 <div className="relative overflow-hidden rounded-[18px] bg-slate-950 border border-white/10 aspect-square">
                   <img
-                    src="/assets/profile.jpg"
+                    src={profilePhoto}
                     alt={personalInfo.name}
                     className="w-full h-full object-cover object-center"
                   />
@@ -136,7 +137,7 @@ export const Hero = () => {
                         <Server className="w-4 h-4 text-sky-400 flex-shrink-0" />
                         <span className="text-sm font-semibold text-white truncate">{personalInfo.name.split(' ')[0]}</span>
                       </div>
-                      <span className="chip chip-emerald text-[10px] py-1 px-2 flex-shrink-0">
+                      <span className="chip chip-emerald text-xs">
                         <span className="status-dot" />
                         Available
                       </span>

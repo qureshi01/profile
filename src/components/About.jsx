@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
-import { User, GraduationCap, Globe, Mail, Phone, MapPin, FileText, CheckCircle2, Terminal, Eye, ExternalLink } from 'lucide-react';
+import { User, GraduationCap, Globe, Mail, Phone, MapPin, FileText, CheckCircle2, Terminal, Eye, ExternalLink, X } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
 import { useArchitecture } from '../context/ArchitectureContext';
+import resumePage1 from '../assets/resume-page1.png';
+import resumePage2 from '../assets/resume-page2.png';
 
 export const About = () => {
   const { triggerTelemetry, isDevToolsActive } = useArchitecture();
@@ -59,31 +61,35 @@ export const About = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
-          <div className="lg:col-span-7 stack-lg">
-            <div className="glass-card card-pad stack-lg">
-              <h3 className="text-xl md:text-2xl font-bold text-white flex items-center gap-3 card-divider">
-                <Terminal className="w-5 h-5 text-sky-400" />
-                Backend Engineering Focus
-              </h3>
+        {/* Top Row: Left (Backend Focus) & Right (Contact Info + Languages) aligned top and bottom */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch mb-12 sm:mb-14 md:mb-16">
+          {/* Left Column: Backend Engineering Focus Card with generous inner & outer spacing */}
+          <div className="lg:col-span-7 flex flex-col">
+            <div className="glass-card card-pad p-6 sm:p-8 md:p-9 stack-lg flex-1 flex flex-col justify-between">
+              <div className="stack-md">
+                <h3 className="text-xl md:text-2xl font-bold text-white flex items-center gap-3 card-divider pb-4 mb-5">
+                  <Terminal className="w-5 h-5 text-sky-400" />
+                  Backend Engineering Focus
+                </h3>
 
-              <p className="text-slate-300 leading-[1.8] text-base md:text-lg">
-                {personalInfo.bio}
-              </p>
+                <p className="text-slate-300 leading-[1.85] text-base mb-6">
+                  {personalInfo.bio}
+                </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {highlights.map((item) => (
-                  <div key={item.title} className="card-inner flex items-start gap-3.5">
-                    <CheckCircle2 className={`w-5 h-5 ${item.color} flex-shrink-0 mt-0.5`} />
-                    <div>
-                      <h4 className="text-sm font-semibold text-white leading-snug">{item.title}</h4>
-                      <p className="text-xs text-slate-500 mt-1 leading-relaxed">{item.desc}</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                  {highlights.map((item) => (
+                    <div key={item.title} className="card-inner flex items-start gap-3.5 p-4">
+                      <CheckCircle2 className={`w-5 h-5 ${item.color} flex-shrink-0 mt-0.5`} />
+                      <div>
+                        <h4 className="text-sm font-semibold text-white leading-snug">{item.title}</h4>
+                        <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">{item.desc}</p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
 
-              <div className="btn-group border-t border-white/8 pt-6 mt-2">
+              <div className="btn-group border-t border-white/8 pt-6 mt-6">
                 <button onClick={() => setShowResumeModal(true)} className="btn-primary text-sm">
                   <Eye className="w-4 h-4" />
                   View Resume
@@ -96,69 +102,73 @@ export const About = () => {
                 )}
               </div>
             </div>
-
-            <div className="stack-md">
-              <h3 className="text-lg font-bold text-white flex items-center gap-2.5">
-                <GraduationCap className="w-5 h-5 text-amber-400" />
-                Education & Certifications
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                {personalInfo.education.map((edu, idx) => (
-                  <div key={idx} className="glass-card card-pad flex flex-col justify-between stack-md">
-                    <div className="stack-sm">
-                      <div className="flex items-center justify-between gap-2 flex-wrap">
-                        <span className="chip chip-amber text-[11px]">{edu.badge}</span>
-                        <span className="text-xs text-slate-500 font-mono">{edu.period}</span>
-                      </div>
-                      <h4 className="font-semibold text-white leading-snug">{edu.degree}</h4>
-                      <p className="text-sm text-slate-400">{edu.institution}</p>
-                    </div>
-                    <p className="text-xs font-mono text-emerald-400 font-semibold pt-4 border-t border-white/8">{edu.score}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
 
-          <div className="lg:col-span-5 stack-lg">
-            <div className="glass-card card-pad stack-md">
-              <h3 className="text-lg font-bold text-white flex items-center gap-2.5 card-divider">
+          {/* Right Column: Contact Info & Languages stacked to match top and bottom levels */}
+          <div className="lg:col-span-5 flex flex-col justify-between gap-6">
+            {/* Contact Info Card */}
+            <div className="glass-card card-pad p-6 sm:p-8 stack-md flex-1">
+              <h3 className="text-lg font-bold text-white flex items-center gap-2.5 card-divider pb-4 mb-4">
                 <User className="w-5 h-5 text-sky-400" />
                 Contact Info
               </h3>
               <div className="stack-sm">
                 {contactItems.map(({ icon: Icon, label, value, href, color }) => (
-                  <div key={label} className="card-inner flex items-center justify-between gap-4 py-4">
-                    <span className="text-slate-500 flex items-center gap-2.5 text-sm">
+                  <div key={label} className="card-inner flex items-center justify-between gap-3 py-3 px-4">
+                    <span className="text-slate-500 flex items-center gap-2 text-xs sm:text-sm">
                       <Icon className={`w-4 h-4 ${color}`} />
                       {label}
                     </span>
                     {href ? (
-                      <a href={href} target={label === 'LinkedIn' ? '_blank' : undefined} rel="noreferrer" className="text-sky-300 hover:underline text-xs sm:text-sm font-medium truncate">
+                      <a href={href} target={label === 'LinkedIn' ? '_blank' : undefined} rel="noreferrer" className="text-sky-300 hover:underline text-xs sm:text-sm font-medium truncate max-w-[180px]">
                         {value}
                       </a>
                     ) : (
-                      <span className="text-slate-200 text-xs sm:text-sm font-medium">{value}</span>
+                      <span className="text-slate-200 text-xs sm:text-sm font-medium truncate max-w-[180px]">{value}</span>
                     )}
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="glass-card card-pad stack-md">
-              <h3 className="text-lg font-bold text-white flex items-center gap-2.5 card-divider">
+            {/* Languages Card */}
+            <div className="glass-card card-pad p-6 sm:p-8 stack-md">
+              <h3 className="text-lg font-bold text-white flex items-center gap-2.5 card-divider pb-4 mb-4">
                 <Globe className="w-5 h-5 text-emerald-400" />
                 Languages
               </h3>
               <div className="stack-sm">
                 {personalInfo.languages.map((lang, idx) => (
-                  <div key={idx} className="card-inner flex justify-between items-center gap-4 py-3.5">
-                    <span className="text-white font-medium text-sm">{lang.name}</span>
+                  <div key={idx} className="card-inner flex justify-between items-center gap-3 py-3 px-4">
+                    <span className="text-white font-medium text-xs sm:text-sm">{lang.name}</span>
                     <span className="text-slate-500 text-xs text-right">{lang.level}</span>
                   </div>
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Bottom Section: Education Info with distinct Margin Top */}
+        <div className="mt-14 sm:mt-16 md:mt-20 lg:mt-24 border-t border-white/8 pt-8 sm:pt-10 stack-md">
+          <h3 className="text-xl font-bold text-white flex items-center gap-2.5 mb-5">
+            <GraduationCap className="w-5 h-5 text-amber-400" />
+            Education & Certifications
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
+            {personalInfo.education.map((edu, idx) => (
+              <div key={idx} className="glass-card card-pad p-6 flex flex-col justify-between stack-md">
+                <div className="stack-sm">
+                  <div className="flex items-center justify-between gap-2 flex-wrap">
+                    <span className="chip chip-amber text-[11px]">{edu.badge}</span>
+                    <span className="text-xs text-slate-500 font-mono">{edu.period}</span>
+                  </div>
+                  <h4 className="font-semibold text-white text-lg leading-snug">{edu.degree}</h4>
+                  <p className="text-sm text-slate-400 leading-relaxed">{edu.institution}</p>
+                </div>
+                <p className="text-xs font-mono text-emerald-400 font-semibold pt-3.5 border-t border-white/8">{edu.score}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -169,13 +179,15 @@ export const About = () => {
             <div className="modal-header">
               <h3 className="font-bold text-lg text-white flex items-center gap-2">
                 <FileText className="w-5 h-5 text-sky-400" />
-                Resume
+                Resume — Hashim Qureshi
               </h3>
-              <button onClick={() => setShowResumeModal(false)} className="nav-help-btn">✕</button>
+              <button onClick={() => setShowResumeModal(false)} className="btn-ghost text-xs px-3 py-1.5 min-h-0">
+                <X className="w-4 h-4" />
+              </button>
             </div>
             <div className="stack-lg">
-              <img src="/assets/resume-page1.png" alt="Resume Page 1" className="w-full rounded-xl border border-white/10" />
-              <img src="/assets/resume-page2.png" alt="Resume Page 2" className="w-full rounded-xl border border-white/10" />
+              <img src={resumePage1} alt="Resume Page 1" className="w-full rounded-xl border border-white/10" />
+              <img src={resumePage2} alt="Resume Page 2" className="w-full rounded-xl border border-white/10" />
             </div>
           </div>
         </div>,

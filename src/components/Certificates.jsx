@@ -3,6 +3,8 @@ import { createPortal } from 'react-dom';
 import { Award, ShieldCheck, Eye, Terminal } from 'lucide-react';
 import { certificateData } from '../data/portfolioData';
 import { TelemetryButton } from './TelemetryButton';
+import certImage from '../assets/certificate-aivariant.png';
+import resumeFallback from '../assets/resume-page1.png';
 
 export const Certificates = () => {
   const [showImageModal, setShowImageModal] = useState(false);
@@ -62,12 +64,12 @@ export const Certificates = () => {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
             <div className="md:col-span-5 relative group overflow-hidden rounded-2xl border border-white/10 bg-slate-950 aspect-[3/4] max-w-sm mx-auto md:max-w-none w-full">
               <img
-                src={certificateData.image}
+                src={certImage}
                 alt={certificateData.title}
                 className="w-full h-full object-cover"
                 onError={(e) => {
                   e.target.onerror = null;
-                  e.target.src = '/assets/resume-page1.png';
+                  e.target.src = resumeFallback;
                 }}
               />
               <div className="absolute inset-0 bg-slate-950/70 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-6">
@@ -101,12 +103,16 @@ export const Certificates = () => {
                 ))}
               </div>
 
-              <div className="btn-group pt-2">
+              <div className="btn-group border-t border-white/8 pt-6">
                 <button onClick={() => setShowImageModal(true)} className="btn-primary text-sm">
                   <Eye className="w-4 h-4" />
                   Preview Certificate
                 </button>
-                <TelemetryButton traceData={certTraceData} label="Verify JWT" icon={Terminal} />
+                <TelemetryButton
+                  traceData={certTraceData}
+                  label="Verify RSA-256 Signature"
+                  className="w-full sm:w-auto"
+                />
               </div>
             </div>
           </div>
@@ -114,16 +120,29 @@ export const Certificates = () => {
       </div>
 
       {showImageModal && createPortal(
-        <div className="modal-overlay" onClick={() => setShowImageModal(false)}>
-          <div className="modal-panel modal-panel-lg stack-md" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="modal-overlay"
+          onClick={() => setShowImageModal(false)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className="modal-panel modal-panel-lg" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
-              <h3 className="font-bold text-white flex items-center gap-2 text-sm sm:text-base">
-                <Award className="w-5 h-5 text-amber-400" />
-                {certificateData.certificateCode}
-              </h3>
-              <button onClick={() => setShowImageModal(false)} className="nav-help-btn">✕</button>
+              <div>
+                <h3 className="font-bold text-lg text-white">AiVariant Certificate</h3>
+                <p className="text-xs font-mono text-amber-400 mt-1">{certificateData.certificateCode}</p>
+              </div>
+              <button onClick={() => setShowImageModal(false)} className="btn-ghost text-xs px-3 py-1.5 min-h-0">
+                Close
+              </button>
             </div>
-            <img src={certificateData.image} alt="Certificate" className="w-full rounded-xl border border-white/10" />
+            <div className="modal-body items-center">
+              <img
+                src={certImage}
+                alt={certificateData.title}
+                className="w-full max-h-[75vh] object-contain rounded-xl border border-white/10"
+              />
+            </div>
           </div>
         </div>,
         document.body

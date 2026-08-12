@@ -14,14 +14,14 @@ export const personalInfo = {
   experienceYears: "3+",
   education: [
     {
-      degree: "Bachelor of Technology (Mechanical Engineering)",
-      institution: "SRM Institute of Science and Technology",
+      degree: "B.Tech Mechanical Engineering",
+      institution: "SRM Institute of Science & Technology",
       period: "2019 – 2023",
-      score: "GPA: 8.43",
+      score: "GPA: 8.43 / 10",
       badge: "Honors Graduate"
     },
     {
-      degree: "Full Stack Java Developer Certification",
+      degree: "Full Stack Java Specialist",
       institution: "Jspiders / Excelr Institute, Bangalore",
       period: "2023 – 2024",
       score: "Certified Specialist",
