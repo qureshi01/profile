@@ -3,7 +3,8 @@ import { User, GraduationCap, Globe, Mail, Phone, MapPin, FileText, CheckCircle2
 import { personalInfo } from '../data/portfolioData';
 import { useArchitecture } from '../context/ArchitectureContext';
 import { TelemetryButton } from './TelemetryButton';
-import { asset } from '../utils/asset';
+import resumePage1 from '../assets/resume-page1.png';
+import resumePage2 from '../assets/resume-page2.png';
 
 export const About = () => {
   const { isDevToolsActive } = useArchitecture();
@@ -186,10 +187,10 @@ export const About = () => {
               <button onClick={() => setShowResumeModal(false)} className="btn btn-secondary text-xs px-3 py-1.5 min-h-0">✕ Close</button>
             </div>
             <div className="space-y-6">
-              {['resume-page1','resume-page2'].map((p, i) => (
+              {[resumePage1, resumePage2].map((src, i) => (
                 <div key={i}>
                   <p className="text-[10px] font-mono text-[var(--cyan)] mb-2">Page {i+1}</p>
-                  <img src={asset(`assets/${p}.png`)} alt={`Resume page ${i+1}`}
+                  <img src={src} alt={`Resume page ${i+1}`}
                     className="w-full rounded-lg border border-[var(--border-default)] shadow-2xl" />
                 </div>
               ))}

@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Award, ShieldCheck, Eye, Terminal } from 'lucide-react';
 import { certificateData } from '../data/portfolioData';
 import { TelemetryButton } from './TelemetryButton';
-import { asset } from '../utils/asset';
+import certImage from '../assets/certificate-aivariant.png';
+import resumeFallback from '../assets/resume-page1.png';
 
 export const Certificates = () => {
   const [showImageModal, setShowImageModal] = useState(false);
@@ -48,9 +49,9 @@ export const Certificates = () => {
             <div className="lg:col-span-5">
               <div className="relative group overflow-hidden rounded-lg border border-[var(--border-default)] bg-[var(--bg-surface)] aspect-[3/4]">
                 <img
-                  src={asset(certificateData.image.replace(/^\//, ''))} alt={certificateData.title}
+                  src={certImage} alt={certificateData.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  onError={e => { e.target.onerror = null; e.target.src = asset('assets/resume-page1.png'); }}
+                  onError={e => { e.target.onerror = null; e.target.src = resumeFallback; }}
                 />
                 <div className="absolute inset-0 bg-[var(--bg-base)]/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                   <button onClick={() => setShowImageModal(true)} className="btn btn-primary text-xs">
@@ -112,7 +113,7 @@ export const Certificates = () => {
               </h3>
               <button onClick={() => setShowImageModal(false)} className="btn btn-secondary text-xs px-3 py-1.5 min-h-0">✕ Close</button>
             </div>
-            <img src={asset(certificateData.image.replace(/^\//, ''))} alt="AiVariant Certificate"
+            <img src={certImage} alt="AiVariant Certificate"
               className="w-full rounded-lg border border-[var(--border-default)] shadow-2xl" />
           </div>
         </div>
